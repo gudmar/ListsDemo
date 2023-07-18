@@ -18,3 +18,7 @@ export type PicturesData = {
     stockLevel: ProgressType,
     imageName: string,
 }
+
+export interface AnyObject {
+    [key: string]: any
+}
