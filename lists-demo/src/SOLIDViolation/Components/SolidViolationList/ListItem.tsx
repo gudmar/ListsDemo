@@ -1,4 +1,5 @@
-import { DONE_STAGE_MAX_POINTS, IMG_PATH, NOTES, TO_DOS } from "../../../Const/const";
+import { DONE_STAGE_MAX_POINTS, NOTES, TO_DOS } from "../../../Const/const";
+import { IMG_PATH } from "../../../Const/photoPath";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { iListItem, iNoteListItem, iToDosListItem, iDoneStage, iPicturesData } from "../../Types/types"
@@ -18,7 +19,8 @@ const NoteListItem = ({data}: iNoteListItem) => {
 const DoneStage = ({level}: iDoneStage) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
-    const stages = Array(DONE_STAGE_MAX_POINTS).map((_, index) => index >= level ? false : true)
+    const stages = Array(DONE_STAGE_MAX_POINTS).fill(null).map((_, index) => index >= level ? false : true)
+    console.log(stages)
     return (
         <div className={classes.doneStageWrapper}>
             {
@@ -41,10 +43,15 @@ const ToDosListItem = ({
     const classes = useListStyles(theme);
     return (
         <div className={classes.listItem}>
-            <input type="checkbox" checked={isDone} id={`${id}`}/>
-            <label htmlFor={`${id}`}>{message}</label>
-            {notes}
-            <DoneStage level={doneStage} />
+            <div className={classes.horizontal}>
+                <input type="checkbox" checked={isDone} id={`${id}`}/>
+                <div>
+                    <label htmlFor={`${id}`} className={classes.message}>{message}</label>
+                    <hr/>
+                    <div>{notes}</div>
+                    <DoneStage level={doneStage} />
+                </div>
+            </div>
         </div>
     )
 }
@@ -64,8 +71,14 @@ const PhotoListItem = ({
             <div className={classes.pictureTitle}>{title}</div>
             <div className={classes.picturePrice}>{price}</div>
             <div className={classes.pictureMessage}>{message}</div>
-            <DoneStage level={stockLevel} />
-            <img src={`${IMG_PATH}${imageName}`} alt='sold graphic representation'/>
+            <div className={classes.center}>
+                Stock level: 
+                <DoneStage level={stockLevel} />
+            </div>
+            <div className={classes.center}>
+                <img src={`./${imageName}`} alt='sold graphic representation'/>
+            </div>
+            
         </div>
     )
 }

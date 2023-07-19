@@ -5,12 +5,27 @@ export const useListStyles = createUseStyles({
     board: (theme: CustomTheme) => ({
         backgroundColor: theme.customBackground,
         overflow: 'auto',
-        width: '100vw',
+        // width: '100vw',
         height: '100vh',
         fontFamily: theme.customFontStyles,
         color: theme.customColor,
         position: 'relative',
     }),
+    listTitle: (theme: CustomTheme) => ({
+        fontWeight: 'bold',
+        color: theme.listTitleColor,
+        textAlign: 'center',
+        fontSize: '2.5rem',
+        margin: '1rem',
+
+
+    }),
+    horizontal: {
+        display: 'flex',
+    },
+    message: {
+        fontWeight: 'bold',
+    },
     listWrapper: (theme: CustomTheme) => ({
         widthMin: '200px',
         width: '25%',
@@ -21,6 +36,7 @@ export const useListStyles = createUseStyles({
         zIndex: '1',
         overflow: 'auto',
         backgroundColor: theme.listBackground,
+        margin: '1rem'
     }),
     listItem: (theme: CustomTheme) => ({
         backgroundColor: 'white',
@@ -54,8 +70,21 @@ export const useListStyles = createUseStyles({
         '&:after':{
             right: '10%',
             transform: 'rotate(10deg)'
+        },
+        '& img': {
+            // width: 'calc(100% - 1.5rem)',
+            width: '90%',
+            border: 'solid thin #ccc',
+            borderRadius: '0.5rem',
+            padding: '0.5rem',
+            // margin: '0.5rem'
         }
     }),
+    center: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     
     doneStageWrapper: (theme: CustomTheme) => ({
         display: 'flex',
@@ -63,15 +92,17 @@ export const useListStyles = createUseStyles({
     notDoneStage: (theme: CustomTheme) => ({
         borderRadius: '50%',
         border: 'black solid thin',
-        width: '1rem',
-        height: '1rem',
+        width: '0.7rem',
+        height: '0.7rem',
+        margin: '0.2rem'
     }),
     doneStage:  (theme: CustomTheme) => ({
         borderRadius: '50%',
         border: 'black solid thin',
-        width: '1rem',
-        height: '1rem',
+        width: '0.7rem',
+        height: '0.7rem',
         backgroundColor: 'black',
+        margin: '0.2rem'
     }),
     pictureTitle: (theme: CustomTheme) => ({
         fontWeight: 'bold',

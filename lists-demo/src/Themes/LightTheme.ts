@@ -11,6 +11,7 @@ export const LightNamedTheme: NamedTheme = {
         customColor: '#222',
         customNavBackground: '#AAA',
         listItemHoverBackground: '#DDDDDD',
+        listTitleColor: '#000010'
     }, 
     name: LIGHT_THEME,
 }
