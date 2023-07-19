@@ -52,21 +52,25 @@ const List = ({
     }, []) // LOAD DATA. Violates DIP
 
     return (
-        <div className={classes.listWrapper}>
+        <div className={`${classes.listWrapper} ${type===PHOTOS && classes.extraWidthForList}`}>
+            {/* Violation of DIP with this type prop */}
             <div className={classes.listTitle}>{getListTitle(type)}</div> 
-            {/* //violation of open close principle */}
-            {
-                data.map((item, index) => {
-                    return (
-                    <ListItem
-                        type={type}
-                        data={item}
-                        id={index}
-                        key={index}
-                    />
-                    )
-                })
-            }
+            {/* //violation of open close principle with getListTitle and knowledge of type*/}
+            {/* Also violation of DIP as this is a generic component and it should not know about type */}
+            <div className={classes.overflowAuto}>
+                {
+                    data.map((item, index) => {
+                        return (
+                        <ListItem
+                            type={type}
+                            data={item}
+                            id={index}
+                            key={index}
+                        />
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

@@ -1,10 +1,14 @@
 import { createUseStyles } from "react-jss";
 import { CustomTheme } from "../Types/themes"
 
+const TITLE_SIZE = '2.5rem';
+const TITLE_MARGIN = '1rem';
+const TITLE_LOST = '4.5rem';
+
 export const useListStyles = createUseStyles({
     board: (theme: CustomTheme) => ({
         backgroundColor: theme.customBackground,
-        overflow: 'auto',
+        // overflow: 'auto',
         // width: '100vw',
         height: '100vh',
         fontFamily: theme.customFontStyles,
@@ -15,8 +19,8 @@ export const useListStyles = createUseStyles({
         fontWeight: 'bold',
         color: theme.listTitleColor,
         textAlign: 'center',
-        fontSize: '2.5rem',
-        margin: '1rem',
+        fontSize: TITLE_SIZE,
+        margin: TITLE_MARGIN,
 
 
     }),
@@ -34,7 +38,7 @@ export const useListStyles = createUseStyles({
         display: 'inline-block',
         position: 'relative',
         zIndex: '1',
-        overflow: 'auto',
+        // overflow: 'auto',
         backgroundColor: theme.listBackground,
         margin: '1rem'
     }),
@@ -110,9 +114,23 @@ export const useListStyles = createUseStyles({
     }),
     picturePrice: (theme: CustomTheme) => ({
         fontWeight: 'bold',
+        fontStyle: 'italic',
+        margin: '0.5rem 0 0.5rem 0'
     }),
     pictureMessage: (theme: CustomTheme) => ({
         fontStyle: 'italic',
-    })
+        fontWeight: '150',
+        margin: '0.5rem 0 0.5rem 0'
+    }),
+    stockLevel: {
+        margin: '0.5rem 0 0.5rem 0'
+    },
+    extraWidthForList: () => ({
+        width: '35%'
+    }),
+    overflowAuto: {
+        height: `calc(100vh - ${TITLE_LOST})`,
+        overflow: 'auto'
+    }
 
 })

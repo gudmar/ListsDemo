@@ -69,9 +69,10 @@ const PhotoListItem = ({
     return (
         <div className={classes.listItem}>
             <div className={classes.pictureTitle}>{title}</div>
-            <div className={classes.picturePrice}>{price}</div>
+            <hr/>
+            <div className={classes.picturePrice}>Buy for: ${price}</div>
             <div className={classes.pictureMessage}>{message}</div>
-            <div className={classes.center}>
+            <div className={`${classes.center} ${classes.stockLevel}`}>
                 Stock level: 
                 <DoneStage level={stockLevel} />
             </div>
