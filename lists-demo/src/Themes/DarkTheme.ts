@@ -11,6 +11,7 @@ export const DarkNamedTheme: NamedTheme = {
         customColor: '#fff',
         customNavBackground: '#444',
         listItemHoverBackground: '#DDDDDD',
+        listTitleColor: '#D0D0E0'
     }, 
     name: DARK_THEME,
 }

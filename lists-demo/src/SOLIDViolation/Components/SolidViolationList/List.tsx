@@ -16,6 +16,13 @@ const getData = (type: OneOfLists): OneOfListsData[] => {
     throw new Error(`Type ${type} is not supported yet`);
 }
 
+const getListTitle = (type: OneOfLists): string => {
+    if (type === NOTES) return 'Notes';
+    if (type === TO_DOS) return 'To-do list';
+    if (type === PHOTOS) return 'Gallery';
+    throw new Error(`Type ${type} is not supported yet`);
+}
+
 const List = ({
     type
 }: iList) => {
@@ -46,6 +53,8 @@ const List = ({
 
     return (
         <div className={classes.listWrapper}>
+            <div className={classes.listTitle}>{getListTitle(type)}</div> 
+            {/* //violation of open close principle */}
             {
                 data.map((item, index) => {
                     return (

@@ -5,6 +5,7 @@ export type CustomTheme = {
     customColor: string,
     customNavBackground: string,
     listItemHoverBackground: string,
+    listTitleColor: string,
 }
 
 export type NamedTheme = {
