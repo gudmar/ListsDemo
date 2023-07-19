@@ -10,11 +10,12 @@ export interface iList {
 export interface iListItem {
     type: OneOfLists,
     data: OneOfListsData,
+    id: number | string,
 }
 
 export interface iNoteListItem {
     data: NoteData,
-    id: number,
+    id: number | string,
 }
 
 export interface iToDosListItem {
@@ -22,7 +23,7 @@ export interface iToDosListItem {
     doneStage: ProgressType,
     isDone: boolean,
     notes?: string,
-    id: number,
+    id: number | string,
 }
 
 export interface iPicturesData {
@@ -31,11 +32,11 @@ export interface iPicturesData {
     message: string,
     stockLevel: ProgressType,
     imageName: string,
-    id: number,
+    id: number | string,
 }
 
 export interface iDoneStage {
     level: ProgressType,
 }
 
-export type OneOfListsData = NoteData | ToDoData | PicturesData;
+export type OneOfListsData = ToDoData|NoteData|PicturesData;

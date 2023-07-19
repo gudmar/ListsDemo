@@ -4,23 +4,57 @@ import { CustomTheme } from "../Types/themes"
 export const useListStyles = createUseStyles({
     board: (theme: CustomTheme) => ({
         backgroundColor: theme.customBackground,
+        overflow: 'auto',
         width: '100vw',
         height: '100vh',
         fontFamily: theme.customFontStyles,
-        color: theme.customColor
+        color: theme.customColor,
+        position: 'relative',
     }),
     listWrapper: (theme: CustomTheme) => ({
-        width: '50px',
-        height: '100%',
-        border: 'solid thin black',
-        backgroundColor: '#888',
-        '&:hover': {
-            cursor: 'pointer',
-        }
+        widthMin: '200px',
+        width: '25%',
+        maxHeight: '100%',
+        borderRadius: '15px',
+        display: 'inline-block',
+        position: 'relative',
+        zIndex: '1',
+        overflow: 'auto',
+        backgroundColor: theme.listBackground,
     }),
     listItem: (theme: CustomTheme) => ({
         backgroundColor: 'white',
-        color: 'black'
+        display: 'block',
+        position: 'relative',
+        color: 'black',
+        margin: '1.5rem',
+        padding: '1rem',
+        transitionDuration: '0.3s',
+        borderRadius: '8px',
+        '&:hover': {
+            cursor: 'pointer',
+            backgroundColor: theme.listItemHoverBackground,
+            transitionDuration: '0.3s',
+        },
+        '&:before, &:after':{
+            content: '" "',
+            display: 'inline-block',
+            position: 'absolute',
+            border: 'solid black thin',
+            width: '30%',
+            height: '15%',
+            top: '50%',
+            boxShadow: '-3px 25px 29px 9px rgba(66, 68, 90, 1)',
+            zIndex: '-1'
+        },
+        '&:before': {
+            left: '10%',
+            transform: 'rotate(-10deg)'
+        },
+        '&:after':{
+            right: '10%',
+            transform: 'rotate(10deg)'
+        }
     }),
     
     doneStageWrapper: (theme: CustomTheme) => ({

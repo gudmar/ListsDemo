@@ -47,11 +47,15 @@ const List = ({
     return (
         <div className={classes.listWrapper}>
             {
-                data.map((item) => {
+                data.map((item, index) => {
+                    return (
                     <ListItem
                         type={type}
                         data={item}
+                        id={index}
+                        key={index}
                     />
+                    )
                 })
             }
         </div>

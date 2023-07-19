@@ -1,7 +1,9 @@
-import { DONE_STAGE_MAX_POINTS, IMG_PATH } from "../../../Const/const";
+import { DONE_STAGE_MAX_POINTS, IMG_PATH, NOTES, TO_DOS } from "../../../Const/const";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { iListItem, iNoteListItem, iToDosListItem, iDoneStage, iPicturesData } from "../../Types/types"
+import { CustomTheme } from '../../../Types/themes'
+import { PicturesData, ToDoData } from "../../../Types/dataTypes";
 
 const NoteListItem = ({data}: iNoteListItem) => {
     const { theme } = useThemesAPI();
@@ -55,7 +57,7 @@ const PhotoListItem = ({
     imageName,
     id,
 }: iPicturesData) => {
-    const { theme } = useThemesAPI();
+    const { theme }: { theme: CustomTheme } = useThemesAPI();
     const classes = useListStyles(theme);
     return (
         <div className={classes.listItem}>
@@ -69,9 +71,38 @@ const PhotoListItem = ({
 }
 
 const ListItem = ({
-    type, data,
+    type, data, id
 }: iListItem) => {
-
+    if (type === TO_DOS) {
+        return (
+            <ToDosListItem
+                id={id}
+                message={data.message}
+                doneStage={(data as ToDoData).doneStage}
+                isDone={(data as ToDoData).isDone}
+                notes={(data as ToDoData).notes}
+            
+            />
+        )
+    } else if (type === NOTES) {
+        return (
+            <NoteListItem 
+                data={data}
+                id={id}
+            />
+        )
+    } else {
+        return (
+            <PhotoListItem 
+                title = {(data as PicturesData).title}
+                price= {(data as PicturesData).price}
+                message = {(data as PicturesData).message}
+                stockLevel = {(data as PicturesData).stockLevel}
+                imageName = {(data as PicturesData).imageName}
+                id={id} 
+            />
+        )
+    }
 }
 
 export default ListItem;

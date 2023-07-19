@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { ThemeProvider } from "react-jss";
 import { INITIAL_THEME, THEMES } from "../Themes";
+import { LightNamedTheme } from "../Themes/LightTheme";
 
 import { NamedTheme } from "../Types/themes";
 
@@ -28,7 +29,7 @@ const useThemeFromName = (themes: NamedTheme[], initialName: string) => {
 }
 
 const ThemesContext = createContext({
-    theme: {},
+    theme: LightNamedTheme.theme,
     setThemeName: (val:any) => {console.error('setThemeName is not overrided')},
     themeNames: THEMES.map(({name})=>name)
 });
