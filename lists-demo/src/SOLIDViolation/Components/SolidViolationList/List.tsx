@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { iList, OneOfLists, OneOfListsData } from "../../Types/types";
 import { notesContent } from "../../../Data/notesContent";
 import { toDoContent } from "../../../Data/toDoContent";
@@ -8,6 +8,8 @@ import { AnyObject } from "../../../Types/dataTypes";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import ListItem from "./ListItem";
+import { getInitialState, reducer } from "./reducer";
+import { useListsState } from "./useListsState";
 
 const getData = (type: OneOfLists): OneOfListsData[] => {
     if (type === NOTES) return notesContent;
@@ -27,9 +29,17 @@ const List = ({
     type
 }: iList) => {
 
-    const [data, setData] = useState<OneOfListsData[]>([])
+    // const [data, setData] = useState<OneOfListsData[]>([])
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
+    const {
+        data,
+        setState,
+        setMessage,
+        setNotes,
+        setIsDone,
+        setDoneStage,
+    } = useListsState();
     
     useEffect(() => {
         const getDataFromLocalStorage: <T = AnyObject>(key: string) => (null | T[]) = (key: string) => {
@@ -44,9 +54,9 @@ const List = ({
         const dataFromStorage = getDataFromLocalStorage<OneOfListsData>(type);
         if (!dataFromStorage) {
             const initialData = getData(type)
-            setData(initialData)
+            setState(initialData)
         } else {
-            setData(dataFromStorage);
+            setState(dataFromStorage);
         }
         
     }, []) // LOAD DATA. Violates DIP
@@ -61,12 +71,12 @@ const List = ({
                 {
                     data.map((item, index) => {
                         return (
-                        <ListItem
-                            type={type}
-                            data={item}
-                            id={index}
-                            key={index}
-                        />
+                            <ListItem
+                                type={type}
+                                data={item}
+                                id={index}
+                                key={index}
+                            />
                         )
                     })
                 }
