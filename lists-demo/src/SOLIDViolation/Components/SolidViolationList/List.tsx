@@ -53,7 +53,7 @@ const List = ({
         }
         const dataFromStorage = getDataFromLocalStorage<OneOfListsData>(type);
         if (!dataFromStorage) {
-            const initialData = getData(type)
+            const initialData = getData(type) 
             setState(initialData)
         } else {
             setState(dataFromStorage);
