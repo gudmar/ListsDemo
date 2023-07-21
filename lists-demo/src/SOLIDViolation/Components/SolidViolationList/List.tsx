@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
-import { iList, OneOfLists, OneOfListsData } from "../../Types/types";
+import { iList, OneOfLists, OneOfListsData, tState } from "../../Types/types";
 import { notesContent } from "../../../Data/notesContent";
 import { toDoContent } from "../../../Data/toDoContent";
 import { picturesContent } from "../../../Data/picturesContent";
@@ -8,7 +8,6 @@ import { AnyObject } from "../../../Types/dataTypes";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import ListItem from "./ListItem";
-import { getInitialState, reducer } from "./reducer";
 import { useListsState } from "./useListsState";
 
 const getData = (type: OneOfLists): OneOfListsData[] => {
@@ -52,11 +51,16 @@ const List = ({
             }
         }
         const dataFromStorage = getDataFromLocalStorage<OneOfListsData>(type);
+        // const initialData = getData(type)
+        // const dataSource = dataFromStorage || initialData;
+        // console.log(dataFromStorage)
+        // console.log(initialData)
+        // dataSource.forEach((data: OneOfListsData, index: number) => setState(data, index))        
         if (!dataFromStorage) {
-            const initialData = getData(type) 
-            setState(initialData)
+            const initialData = getData(type)
+            initialData.forEach((data: OneOfListsData, index: number) => setState(data, index))
         } else {
-            setState(dataFromStorage);
+            dataFromStorage.forEach((data: OneOfListsData, index: number) => setState(data, index))
         }
         
     }, []) // LOAD DATA. Violates DIP
