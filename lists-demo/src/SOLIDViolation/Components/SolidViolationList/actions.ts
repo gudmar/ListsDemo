@@ -1,0 +1,25 @@
+import { tPayload } from "../../Types/types";
+
+export const EDIT_MESSAGE = 'edit message';
+export const EDIT_DONE_STAGE = 'edit done stage';
+export const EDIT_IS_DONE = 'edit if task is done';
+export const EDIT_NOTES = 'edit notes';
+export const SET_STATE = 'set state'
+
+export const editMessageAction = (payload: tPayload) => ({
+    type: EDIT_MESSAGE, payload
+})
+
+export const editDoneStageAction = (payload: tPayload) => ({
+    type: EDIT_DONE_STAGE, payload
+})
+
+export const editIsDoneAction = (payload: tPayload) => ({
+    type: EDIT_NOTES, payload
+})
+
+export const editNotesAction = (payload: tPayload) => ({
+    type: EDIT_NOTES, payload
+})
+
+export const setStateAction = (payload: tPayload) => ({type: SET_STATE, payload})

@@ -1,4 +1,3 @@
-import {NOTES} from '../../Const/const'
 import { NoteData, PicturesData, ProgressType, ToDoData } from '../../Types/dataTypes'
 
 export type OneOfLists = "Notes" | "ToDoList" | "Photos"
@@ -40,3 +39,20 @@ export interface iDoneStage {
 }
 
 export type OneOfListsData = ToDoData|NoteData|PicturesData;
+
+export type tState = {
+    message: string,
+    doneStage: ProgressType,
+    isDone: boolean,
+    notes: string,
+    // title: string,
+    // price: number,
+    // stockLevel: ProgressType,
+    // imageName: string,
+    // User may not manipulate stockLevel or imageNames, that is why this should not be in state
+}
+
+export type tPayload = {
+    index: number,
+    data: any,
+}
