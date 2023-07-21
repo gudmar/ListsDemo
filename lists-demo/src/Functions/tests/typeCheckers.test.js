@@ -133,6 +133,20 @@ describe('Testing typeCheckers', () => {
                 isString: false,
             }
         },
+        { 
+            input: {},
+            expected: {
+                isNumber: false,
+                isNull: false,
+                isUndefined: false,
+                isBoolean: false,
+                isArray: false,
+                isObject: true,
+                isFunction: false,
+                isString: false,
+            }
+        },
+
     ]
 
     describe('Does isNumber work', () => {
