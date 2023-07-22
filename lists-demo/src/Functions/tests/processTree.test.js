@@ -1,7 +1,7 @@
-import { NOT_VALID_INPUT, processTree } from "../processTree";
+import { deleteBranch, NOT_VALID_INPUT, processTree } from "../processTree";
 const MARK = 'mark me'
 const LOCK = 'lock'
-const conditionFunction = (obj) => obj.process === MARK
+const conditionFunction = (obj) => obj?.process === MARK
 const actionFunction = (obj) => {
     obj.lock = 'lock'
 }
@@ -92,7 +92,7 @@ describe('Testing a function that does an operation on every tree node, if a con
         expected.nested.lock = LOCK;
         expect(result).toEqual(expected);
     })
-    it('Shoudl return modified object that is nested in array', () => {
+    it('Should return modified object that is nested in array', () => {
         const getInput = () => ({
             arr: [
                 {a: 'e'}, {b: 'c'}, {nest: { process: MARK}},
@@ -113,6 +113,95 @@ describe('Testing a function that does an operation on every tree node, if a con
         const expected = getInput();
         expected.arr[2].nest.lock = LOCK;
         expected.nest.nest.lock =LOCK;
+        expect(result).toEqual(expected);
+    })
+})
+
+describe('Testing usage of processTree to branch deletion', () => {
+    it('Should delete a not nested object if condition function matches', () => {
+        const getInput = () => ({
+            a: 'abba',
+            process: MARK,
+            arr: [],
+        })
+        const tree = getInput();
+        const result = deleteBranch({tree, conditionFunction});
+        expect(result).toBeUndefined();
+    })
+    it('Should NOT delete a not nested object if condition function does not match', () => {
+        const getInput = () => ({
+            a: 'abba',
+            process: 'not process',
+            arr: [],
+        })
+        const tree = getInput();
+        const result = deleteBranch({tree, conditionFunction});
+        expect(result).toEqual(getInput());
+    })
+    it('Should remove an object from array if it matches requirements', () => {
+        const tree = [
+            {a: false}, {process: 'not'}, {process: MARK}, {a: 2}
+        ];
+        const expected = [
+            {a: false}, {process: 'not'}, {a: 2}
+        ]
+        const result = deleteBranch({tree, conditionFunction});
+        expect(result).toEqual(expected);
+    })
+
+    it('Should remove a nested object if matches', () => {
+        const getInput = () => ({
+            a: 'abba',
+            process: 'not process',
+            arr: [],
+            nested: {
+                a: true,
+                b: false,
+                nested: {
+                    process: MARK,
+                    nested: {
+                        comment: 'remove with parent'
+                    }
+                }
+            }
+        })
+        const tree = getInput();
+        const result = deleteBranch({tree, conditionFunction});
+        const expected = getInput()
+        delete expected.nested.nested
+        expect(result).toEqual(expected);
+    })
+    it('Should remove a nested marked object, that is in array', () => {
+        const getTree = () => ({
+            a: 'abba',
+            process: 'notProcess',
+            arr: [],
+            nested: {
+                b: 'afd',
+                nested: {
+                    process: 'not'
+                },
+                arr: [
+                    {
+                        process: false,
+                    },
+                    {
+                        nested:{
+                            nested: {
+                                process: MARK,
+                                arr: [
+                                    {process: MARK}
+                                ]
+                            }    
+                        }
+                    }
+                ]
+            }
+        });
+        const expected = getTree();
+        delete expected.nested.arr[1].nested.nested;
+        const tree = getTree();
+        const result = deleteBranch({tree, conditionFunction})
         expect(result).toEqual(expected);
     })
 })
