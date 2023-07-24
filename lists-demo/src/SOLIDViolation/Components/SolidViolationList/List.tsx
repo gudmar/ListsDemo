@@ -27,10 +27,14 @@ const getListTitle = (type: OneOfLists): string => {
 const List = ({
     type
 }: iList) => {
-
+    window['React2' as any] = require('react');
+    
+    // https://react.dev/warnings/invalid-hook-call-warning
+    console.log('PROBABLY DUPLICATE REACT', window['React1' as any] === window['React2' as any])
     // const [data, setData] = useState<OneOfListsData[]>([])
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
+    // const classes = {listWrapper: '', extraWidthForList: '', overflowAuto: '', listTitle: ''}
     const {
         data,
         setState,
