@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useLayoutEffect, useReducer, useState } from "react";
 import { iList, OneOfLists, OneOfListsData, tState } from "../../Types/types";
 import { notesContent } from "../../../Data/notesContent";
 import { toDoContent } from "../../../Data/toDoContent";
@@ -29,8 +29,6 @@ const List = ({
 }: iList) => {
     window['React2' as any] = require('react');
     
-    // https://react.dev/warnings/invalid-hook-call-warning
-    console.log('PROBABLY DUPLICATE REACT', window['React1' as any] === window['React2' as any])
     // const [data, setData] = useState<OneOfListsData[]>([])
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
@@ -69,8 +67,11 @@ const List = ({
         
     }, []) // LOAD DATA. Violates DIP
 
+    useEffect(() => {console.log(data)}, [data])
+
     return (
         <div className={`${classes.listWrapper} ${type===PHOTOS && classes.extraWidthForList}`}>
+            <button onClick ={() => console.log(data)}>log data</button>
             {/* Violation of DIP with this type prop */}
             <div className={classes.listTitle}>{getListTitle(type)}</div> 
             {/* //violation of open close principle with getListTitle and knowledge of type*/}
@@ -83,7 +84,7 @@ const List = ({
                                 type={type}
                                 data={item}
                                 id={index}
-                                key={index}
+                                key={item.toString()}
                             />
                         )
                     })
