@@ -1,5 +1,4 @@
 import { DONE_STAGE_MAX_POINTS, NOTES, TO_DOS } from "../../../Const/const";
-import { IMG_PATH } from "../../../Const/photoPath";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { iListItem, iNoteListItem, iToDosListItem, iDoneStage, iPicturesData } from "../../Types/types"
@@ -20,12 +19,11 @@ const DoneStage = ({level}: iDoneStage) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
     const stages = Array(DONE_STAGE_MAX_POINTS).fill(null).map((_, index) => index >= level ? false : true)
-    console.log(stages)
     return (
         <div className={classes.doneStageWrapper}>
             {
-                stages.map((stage) => (
-                    <span className={`${stage ? classes.doneStage: classes.notDoneStage}`}></span>
+                stages.map((stage, index: number) => (
+                    <span className={`${stage ? classes.doneStage: classes.notDoneStage}`} key={index}></span>
                 ))
             }
         </div>

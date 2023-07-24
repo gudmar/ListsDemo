@@ -57,6 +57,8 @@ const getStateWithModifiedMultiProps = ({index, propNames, state, data}: iStateM
 
 export const reducer = (state: OneOfListsData[], { type, payload }: { type: string, payload: tPayload} ): OneOfListsData[] => {
     const {data, index }: {data: any, index: number} = payload;
+    console.log('%cSetting reducer', 'background-color: green; color: white; font-weight: bold; padding: 5px; border-radius: 4px')
+    console.log(type, payload)
     switch(type) {
         case EDIT_MESSAGE: {
             const resultState = getStateWithModifiedProp({index, data, state, propName: 'message'});
@@ -80,7 +82,7 @@ export const reducer = (state: OneOfListsData[], { type, payload }: { type: stri
         }
         case SET_STATE: {
             state[index] = data
-            return state;
+            return [...state];
         }
         default: throw new Error('Unpossible')
     }
