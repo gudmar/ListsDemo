@@ -28,11 +28,11 @@ export const picturesContent = [
         imageName: 'honker.JPG'
     },
     {
-        title: 'Mowning in PRL',
-        message: 'A retro lawn mowner. Ford model T, Ford Mustang, Adler, Singer, Fender stratocaster, these are all well recognized icons. Buy this PRL Lown mowner to hang a still not recognized legend, a star of future.',
+        title: 'Mowing in PRL',
+        message: 'A retro lawn mower. Ford model T, Ford Mustang, Adler, Singer, Fender stratocaster, these are all well recognized icons. Buy this PRL Lown mower to hang a still not recognized legend, a star of future.',
         price: 125,
         stockLevel: 3,
-        imageName: 'mowner.png'
+        imageName: 'mower.png'
     },
     {
         title: 'Roof',

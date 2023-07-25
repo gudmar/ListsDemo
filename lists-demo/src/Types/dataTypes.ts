@@ -2,7 +2,7 @@ export type NoteData = {
     message: string,
 }
 
-export type ProgressType =  0 | 1 | 2 | 3 | 4;
+export type ProgressType =  0 | 1 | 2 | 3 | 4 | 5;
 
 export type ToDoData = {
     message: string,

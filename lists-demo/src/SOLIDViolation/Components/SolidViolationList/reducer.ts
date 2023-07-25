@@ -16,8 +16,8 @@ export const getInitialState = ():OneOfListsData[] => [({
 
 const getDoneStageWhenIsDoneChanged = ({state, payload, index}: {state: OneOfListsData[], payload: tPayload, index: number}) => {
     const isDone = payload.data;
-    const MAX_DONE_STAGE = 4
-    const LESS_THEN_MAX = 3;
+    const MAX_DONE_STAGE = 5;
+    const LESS_THEN_MAX = 4;
     const doneStage = (state[index] as ToDoData).doneStage;
     if (doneStage === MAX_DONE_STAGE && isDone === false ) return LESS_THEN_MAX
     if (isDone === true) return MAX_DONE_STAGE;
@@ -68,17 +68,18 @@ export const reducer = (state: OneOfListsData[], { type, payload }: { type: stri
             const resultState = getStateWithModifiedProp({index, data, state, propName: 'notes'})
             return resultState;
         }
-        case EDIT_DONE_STAGE: 
-            const {doneStage} = data;
+        case EDIT_DONE_STAGE:
+            const doneStage = data;
             const objectToModify: OneOfListsData = state[index];
-            const newIsDone = doneStage === 4 ? true : false;
+            const newIsDone = (doneStage === 5) ? true : false;
             state[index] = {...objectToModify, doneStage, isDone: newIsDone};
-            return state;
+            return [...state];
         
         case EDIT_IS_DONE: {
             const newDoneStage = getDoneStageWhenIsDoneChanged({state, payload, index})
-            const newState = {...state, doneStage: newDoneStage, isDone: payload}
-            return newState;
+            const objectToModify: OneOfListsData = state[index];
+            state[index] = {...objectToModify, doneStage: newDoneStage, isDone: data}
+            return [...state];
         }
         case SET_STATE: {
             state[index] = data
