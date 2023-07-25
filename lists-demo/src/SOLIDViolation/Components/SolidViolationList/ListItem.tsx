@@ -3,7 +3,7 @@ import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { iListItem, iNoteListItem, iToDosListItem, iDoneStage, iPicturesData } from "../../Types/types"
 import { CustomTheme } from '../../../Types/themes'
-import { PicturesData, ToDoData } from "../../../Types/dataTypes";
+import { PicturesData, ProgressType, ToDoData } from "../../../Types/dataTypes";
 
 const NoteListItem = ({data}: iNoteListItem) => {
     const { theme } = useThemesAPI();
@@ -15,15 +15,15 @@ const NoteListItem = ({data}: iNoteListItem) => {
     )
 }
 
-const DoneStage = ({level}: iDoneStage) => {
+const DoneStage = ({level, setDoneStage}: iDoneStage) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
     const stages = Array(DONE_STAGE_MAX_POINTS).fill(null).map((_, index) => index >= level ? false : true)
     return (
         <div className={classes.doneStageWrapper}>
             {
-                stages.map((stage, index: number) => (
-                    <span className={`${stage ? classes.doneStage: classes.notDoneStage}`} key={index}></span>
+                stages.map((stage, index) => (
+                    <span data-index={index} className={`${stage ? classes.doneStage: classes.notDoneStage}`} key={index} onClick={() => setDoneStage(index + 1 as ProgressType)}></span>
                 ))
             }
         </div>
@@ -36,18 +36,23 @@ const ToDosListItem = ({
     isDone,
     notes,
     id,
+    setIsDone,
+    setDoneStage,
 }: iToDosListItem) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
+    const onDoneStageChange = (val: ProgressType) => {
+        setDoneStage!(val);
+    }
     return (
         <div className={classes.listItem}>
             <div className={classes.horizontal}>
-                <input type="checkbox" checked={isDone} id={`${id}`}/>
+                <input type="checkbox" checked={isDone} id={`${id}`} onChange={() => { setIsDone!(!isDone)}}/>
                 <div>
                     <label htmlFor={`${id}`} className={classes.message}>{message}</label>
                     <hr/>
                     <div>{notes}</div>
-                    <DoneStage level={doneStage} />
+                    <DoneStage level={doneStage} setDoneStage={onDoneStageChange}/>
                 </div>
             </div>
         </div>
@@ -72,7 +77,7 @@ const PhotoListItem = ({
             <div className={classes.pictureMessage}>{message}</div>
             <div className={`${classes.center} ${classes.stockLevel}`}>
                 Stock level: 
-                <DoneStage level={stockLevel} />
+                <DoneStage level={stockLevel} setDoneStage={(val:ProgressType)=>{}}/>
             </div>
             <div className={classes.center}>
                 <img src={`./${imageName}`} alt='sold graphic representation'/>
@@ -83,7 +88,7 @@ const PhotoListItem = ({
 }
 
 const ListItem = ({
-    type, data, id
+    type, data, id, setIsDone, setDoneStage,
 }: iListItem) => {
     if (type === TO_DOS) {
         return (
@@ -93,7 +98,8 @@ const ListItem = ({
                 doneStage={(data as ToDoData).doneStage}
                 isDone={(data as ToDoData).isDone}
                 notes={(data as ToDoData).notes}
-            
+                setIsDone = {setIsDone}
+                setDoneStage={setDoneStage}
             />
         )
     } else if (type === NOTES) {

@@ -15,7 +15,7 @@ export const editDoneStageAction = (payload: tPayload) => ({
 })
 
 export const editIsDoneAction = (payload: tPayload) => ({
-    type: EDIT_NOTES, payload
+    type: EDIT_IS_DONE, payload
 })
 
 export const editNotesAction = (payload: tPayload) => ({

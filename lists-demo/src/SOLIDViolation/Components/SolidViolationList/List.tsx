@@ -4,7 +4,7 @@ import { notesContent } from "../../../Data/notesContent";
 import { toDoContent } from "../../../Data/toDoContent";
 import { picturesContent } from "../../../Data/picturesContent";
 import { NOTES, PHOTOS, TO_DOS } from "../../../Const/const";
-import { AnyObject } from "../../../Types/dataTypes";
+import { AnyObject, ProgressType, ToDoData } from "../../../Types/dataTypes";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import ListItem from "./ListItem";
@@ -84,7 +84,11 @@ const List = ({
                                 type={type}
                                 data={item}
                                 id={index}
-                                key={item.toString()}
+                                key={JSON.stringify(item)}
+                                setDoneStage={(val: ProgressType) => setDoneStage(val, index)}
+                                setIsDone={() => {
+                                    if (type === TO_DOS) {setIsDone(!(data as ToDoData[])[index].isDone, index)}
+                                }}
                             />
                         )
                     })

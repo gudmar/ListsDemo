@@ -2,6 +2,9 @@ import { NoteData, PicturesData, ProgressType, ToDoData } from '../../Types/data
 
 export type OneOfLists = "Notes" | "ToDoList" | "Photos"
 
+export type tSetDoneStage = (val: ProgressType) => void;
+export type tSetIsDoneState = (val:boolean) => void;
+
 export interface iList {
     type: OneOfLists,
 }
@@ -10,6 +13,8 @@ export interface iListItem {
     type: OneOfLists,
     data: OneOfListsData,
     id: number | string,
+    setIsDone?: tSetIsDoneState,
+    setDoneStage?: tSetDoneStage,
 }
 
 export interface iNoteListItem {
@@ -23,6 +28,8 @@ export interface iToDosListItem {
     isDone: boolean,
     notes?: string,
     id: number | string,
+    setDoneStage?: tSetDoneStage,
+    setIsDone?: tSetIsDoneState,
 }
 
 export interface iPicturesData {
@@ -36,6 +43,7 @@ export interface iPicturesData {
 
 export interface iDoneStage {
     level: ProgressType,
+    setDoneStage: tSetDoneStage,
 }
 
 export type OneOfListsData = ToDoData|NoteData|PicturesData;
