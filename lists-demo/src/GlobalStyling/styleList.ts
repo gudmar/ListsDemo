@@ -28,7 +28,24 @@ export const useListStyles = createUseStyles({
         display: 'flex',
     },
     message: {
+        outline: '0px solid transparent',
         fontWeight: 'bold',
+        '&:hover': {
+            cursor: 'text'
+        },
+        '&:active': {
+            border: 'none',
+            outline: 'none'
+        }
+    },
+    note: {
+        outline: '0px solid transparent',
+    },
+    pointer:{
+        cursor: 'pointer'
+    },
+    checkboxLabel:{
+        paddingLeft: '1rem',
     },
     listWrapper: (theme: CustomTheme) => ({
         widthMin: '200px',
@@ -51,11 +68,11 @@ export const useListStyles = createUseStyles({
         padding: '1rem',
         transitionDuration: '0.3s',
         borderRadius: '8px',
-        '&:hover': {
-            cursor: 'pointer',
-            backgroundColor: theme.listItemHoverBackground,
-            transitionDuration: '0.3s',
-        },
+        // '&:hover': {
+        //     cursor: 'pointer',
+        //     backgroundColor: theme.listItemHoverBackground,
+        //     transitionDuration: '0.3s',
+        // },
         '&:before, &:after':{
             content: '" "',
             display: 'inline-block',
@@ -92,6 +109,7 @@ export const useListStyles = createUseStyles({
     
     doneStageWrapper: (theme: CustomTheme) => ({
         display: 'flex',
+        cursor: 'pointer',
     }),
     notDoneStage: (theme: CustomTheme) => ({
         borderRadius: '50%',

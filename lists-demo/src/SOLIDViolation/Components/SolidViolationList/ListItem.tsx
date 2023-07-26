@@ -4,6 +4,8 @@ import { useListStyles } from "../../../GlobalStyling/styleList";
 import { iListItem, iNoteListItem, iToDosListItem, iDoneStage, iPicturesData } from "../../Types/types"
 import { CustomTheme } from '../../../Types/themes'
 import { PicturesData, ProgressType, ToDoData } from "../../../Types/dataTypes";
+import DeleteIcon from "../../../Icons/DeleteIcon"; 
+import { useStyles } from "./styles";
 
 const NoteListItem = ({data, editMessage}: iNoteListItem) => {
     const { theme } = useThemesAPI();
@@ -43,19 +45,22 @@ const ToDosListItem = ({
 }: iToDosListItem) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
+    const localClasses = useStyles();
     const onDoneStageChange = (val: ProgressType) => {
         setDoneStage!(val);
     }
     return (
         <div className={classes.listItem}>
+            <DeleteIcon className={`${localClasses.right} ${classes.pointer}`} />
             <div className={classes.horizontal}>
-                <input type="checkbox" checked={isDone} id={`${id}`} onChange={() => { setIsDone!(!isDone)}}/>
+                <input className={classes.pointer} type="checkbox" checked={isDone} id={`${id}`} onChange={() => { setIsDone!(!isDone)}}/>
                 <div>
-                    <label htmlFor={`${id}`} className={classes.message} contentEditable onBlur={(e: any) => {editMessage!(e.target.outerText)}}>{message}</label>
+                    <label className={`${classes.message} ${classes.checkboxLabel}`} spellCheck={false}  contentEditable onBlur={(e: any) => {editMessage!(e.target.outerText)}}>{message}</label>
                     <hr/>
-                    <div   contentEditable onBlur={(e: any) => {editNote!(e.target.outerText)}}>{notes}</div>
+                    <div className={classes.note} spellCheck={false} contentEditable onBlur={(e: any) => {editNote!(e.target.outerText)}}>{notes}</div>
                     <DoneStage level={doneStage} setDoneStage={onDoneStageChange}/>
                 </div>
+                
             </div>
         </div>
     )
