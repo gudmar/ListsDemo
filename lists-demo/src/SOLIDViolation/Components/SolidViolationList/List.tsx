@@ -89,6 +89,8 @@ const List = ({
                                 setIsDone={() => {
                                     if (type === TO_DOS) {setIsDone(!(data as ToDoData[])[index].isDone, index)}
                                 }}
+                                editMessage={(notes: string) => setMessage(notes, index)}
+                                editNote={(notes: string) => setNotes(notes, index)}
                             />
                         )
                     })

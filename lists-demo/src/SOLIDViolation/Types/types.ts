@@ -4,6 +4,7 @@ export type OneOfLists = "Notes" | "ToDoList" | "Photos"
 
 export type tSetDoneStage = (val: ProgressType) => void;
 export type tSetIsDoneState = (val:boolean) => void;
+export type tEditNote = (newValue: string) => void;
 
 export interface iList {
     type: OneOfLists,
@@ -15,10 +16,13 @@ export interface iListItem {
     id: number | string,
     setIsDone?: tSetIsDoneState,
     setDoneStage?: tSetDoneStage,
+    editNote?: tEditNote,
+    editMessage?: tEditNote,
 }
 
 export interface iNoteListItem {
     data: NoteData,
+    editMessage: tEditNote,
     id: number | string,
 }
 
@@ -30,6 +34,8 @@ export interface iToDosListItem {
     id: number | string,
     setDoneStage?: tSetDoneStage,
     setIsDone?: tSetIsDoneState,
+    editMessage?: tEditNote,
+    editNote?: tEditNote,
 }
 
 export interface iPicturesData {
