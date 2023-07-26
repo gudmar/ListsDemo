@@ -5,11 +5,11 @@ import { iListItem, iNoteListItem, iToDosListItem, iDoneStage, iPicturesData } f
 import { CustomTheme } from '../../../Types/themes'
 import { PicturesData, ProgressType, ToDoData } from "../../../Types/dataTypes";
 
-const NoteListItem = ({data}: iNoteListItem) => {
+const NoteListItem = ({data, editMessage}: iNoteListItem) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
     return (
-        <div className={classes.listItem}>
+        <div className={classes.listItem} contentEditable onBlur={(e: any) => {editMessage(e.target.outerText)}}>
             {data.message}
         </div>
     )
@@ -38,6 +38,8 @@ const ToDosListItem = ({
     id,
     setIsDone,
     setDoneStage,
+    editMessage,
+    editNote,
 }: iToDosListItem) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
@@ -49,9 +51,9 @@ const ToDosListItem = ({
             <div className={classes.horizontal}>
                 <input type="checkbox" checked={isDone} id={`${id}`} onChange={() => { setIsDone!(!isDone)}}/>
                 <div>
-                    <label htmlFor={`${id}`} className={classes.message}>{message}</label>
+                    <label htmlFor={`${id}`} className={classes.message} contentEditable onBlur={(e: any) => {editMessage!(e.target.outerText)}}>{message}</label>
                     <hr/>
-                    <div>{notes}</div>
+                    <div   contentEditable onBlur={(e: any) => {editNote!(e.target.outerText)}}>{notes}</div>
                     <DoneStage level={doneStage} setDoneStage={onDoneStageChange}/>
                 </div>
             </div>
@@ -88,7 +90,7 @@ const PhotoListItem = ({
 }
 
 const ListItem = ({
-    type, data, id, setIsDone, setDoneStage,
+    type, data, id, setIsDone, setDoneStage, editMessage, editNote
 }: iListItem) => {
     if (type === TO_DOS) {
         return (
@@ -100,12 +102,15 @@ const ListItem = ({
                 notes={(data as ToDoData).notes}
                 setIsDone = {setIsDone}
                 setDoneStage={setDoneStage}
+                editMessage={editMessage}
+                editNote={editNote}
             />
         )
     } else if (type === NOTES) {
         return (
             <NoteListItem 
                 data={data}
+                editMessage={editMessage!}
                 id={id}
             />
         )

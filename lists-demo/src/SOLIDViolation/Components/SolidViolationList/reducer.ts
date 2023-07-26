@@ -42,7 +42,7 @@ interface iStateMultiPropModifier {
 const getStateWithModifiedProp = ({index, propName, state, data}: iStatePropModifier) => {
     const modifiedObject: OneOfListsData = state[index];
     state[index] = {...modifiedObject, [propName]: data}
-    return state; // returning not a new object, but the object that will be passed to listItem is new
+    return [...state]; // returning not a new object, but the object that will be passed to listItem is new
 }
 
 const getStateWithModifiedMultiProps = ({index, propNames, state, data}: iStateMultiPropModifier) => {
