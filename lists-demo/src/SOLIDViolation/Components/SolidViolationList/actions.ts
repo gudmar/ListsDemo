@@ -4,7 +4,8 @@ export const EDIT_MESSAGE = 'edit message';
 export const EDIT_DONE_STAGE = 'edit done stage';
 export const EDIT_IS_DONE = 'edit if task is done';
 export const EDIT_NOTES = 'edit notes';
-export const SET_STATE = 'set state'
+export const SET_STATE = 'set state';
+export const DELETE_ITEM = 'delete item';
 
 export const editMessageAction = (payload: tPayload) => ({
     type: EDIT_MESSAGE, payload
@@ -20,6 +21,10 @@ export const editIsDoneAction = (payload: tPayload) => ({
 
 export const editNotesAction = (payload: tPayload) => ({
     type: EDIT_NOTES, payload
+})
+
+export const deleteItemAction = (payload: tPayload) => ({
+    type: DELETE_ITEM, payload
 })
 
 export const setStateAction = (payload: tPayload) => ({type: SET_STATE, payload})

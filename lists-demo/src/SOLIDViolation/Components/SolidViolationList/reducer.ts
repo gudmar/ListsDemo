@@ -1,6 +1,6 @@
 import { AnyObject, ToDoData } from '../../../Types/dataTypes';
 import { tState, tPayload, OneOfListsData } from '../../Types/types';
-import { EDIT_DONE_STAGE, EDIT_IS_DONE, EDIT_MESSAGE, EDIT_NOTES, SET_STATE } from './actions'
+import { DELETE_ITEM, EDIT_DONE_STAGE, EDIT_IS_DONE, EDIT_MESSAGE, EDIT_NOTES, SET_STATE } from './actions'
 
 export const getInitialState = ():OneOfListsData[] => [({
     message: '',
@@ -56,7 +56,7 @@ const getStateWithModifiedMultiProps = ({index, propNames, state, data}: iStateM
 }
 
 export const reducer = (state: OneOfListsData[], { type, payload }: { type: string, payload: tPayload} ): OneOfListsData[] => {
-    const {data, index }: {data: any, index: number} = payload;
+    const {data, index }: {data?: any, index: number} = payload;
     console.log('%cSetting reducer', 'background-color: green; color: white; font-weight: bold; padding: 5px; border-radius: 4px')
     console.log(type, payload)
     switch(type) {
@@ -84,6 +84,11 @@ export const reducer = (state: OneOfListsData[], { type, payload }: { type: stri
         case SET_STATE: {
             state[index] = data
             return [...state];
+        }
+        case DELETE_ITEM: {
+            const stateCp = [...state]
+            stateCp.splice(index, 1);
+            return [...stateCp];
         }
         default: throw new Error('Unpossible')
     }

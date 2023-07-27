@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import { ProgressType } from "../../../Types/dataTypes";
 import { OneOfListsData, tState } from "../../Types/types";
-import { editDoneStageAction, editIsDoneAction, editMessageAction, editNotesAction, setStateAction } from "./actions";
+import { deleteItemAction, editDoneStageAction, editIsDoneAction, editMessageAction, editNotesAction, setStateAction } from "./actions";
 import { getInitialState, reducer } from "./reducer";
 
 export const useListsState = () => {
@@ -14,8 +14,10 @@ export const useListsState = () => {
         dispatch(editNotesAction({data: notes, index}));
     const setIsDone = (isDone: boolean, index: number) => dispatch(editIsDoneAction({data: isDone, index}));
     const setDoneStage = (doneStage: ProgressType, index: number) => dispatch(editDoneStageAction({data: doneStage, index}));
+    const deleteItem = (index: number) => dispatch(deleteItemAction({ index }))
     return {
         data,
+        deleteItem,
         setState,
         setMessage,
         setNotes,

@@ -42,6 +42,7 @@ const ToDosListItem = ({
     setDoneStage,
     editMessage,
     editNote,
+    deleteItem,
 }: iToDosListItem) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
@@ -51,7 +52,10 @@ const ToDosListItem = ({
     }
     return (
         <div className={classes.listItem}>
-            <DeleteIcon className={`${localClasses.right} ${classes.pointer}`} />
+            <DeleteIcon
+                className={`${localClasses.right} ${classes.pointer}`}
+                onClick={deleteItem}
+            />
             <div className={classes.horizontal}>
                 <input className={classes.pointer} type="checkbox" checked={isDone} id={`${id}`} onChange={() => { setIsDone!(!isDone)}}/>
                 <div>
@@ -95,7 +99,7 @@ const PhotoListItem = ({
 }
 
 const ListItem = ({
-    type, data, id, setIsDone, setDoneStage, editMessage, editNote
+    type, data, id, setIsDone, setDoneStage, editMessage, editNote, deleteItem,
 }: iListItem) => {
     if (type === TO_DOS) {
         return (
@@ -109,6 +113,7 @@ const ListItem = ({
                 setDoneStage={setDoneStage}
                 editMessage={editMessage}
                 editNote={editNote}
+                deleteItem={deleteItem}
             />
         )
     } else if (type === NOTES) {
