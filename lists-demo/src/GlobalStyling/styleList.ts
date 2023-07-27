@@ -15,6 +15,29 @@ export const useListStyles = createUseStyles({
         color: theme.customColor,
         position: 'relative',
     }),
+    marginRight:{
+        marginRight: '1rem',
+    },
+    addItem:{
+        textAlign: "center",
+        '&:hover': {
+            cursor: 'pointer'
+        }
+    },
+    addButton: {
+        width: '1.5rem',
+        height: '1.5rem',
+        lineHeight: '1.5rem',
+        position: 'relative',
+        display: 'inline-block',
+        borderRadius: '50%',
+        backgroundColor: '#11bb11',
+        boxShadow: '1px 1px 15px -5px rgba(0,0,0,0.75) inset',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: '#119911'
+        }
+    },
     listTitle: (theme: CustomTheme) => ({
         fontWeight: 'bold',
         color: theme.listTitleColor,

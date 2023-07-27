@@ -1,6 +1,6 @@
 import { AnyObject, ToDoData } from '../../../Types/dataTypes';
 import { tState, tPayload, OneOfListsData } from '../../Types/types';
-import { DELETE_ITEM, EDIT_DONE_STAGE, EDIT_IS_DONE, EDIT_MESSAGE, EDIT_NOTES, SET_STATE } from './actions'
+import { ADD_ITEM, DELETE_ITEM, EDIT_DONE_STAGE, EDIT_IS_DONE, EDIT_MESSAGE, EDIT_NOTES, SET_STATE } from './actions'
 
 export const getInitialState = ():OneOfListsData[] => [({
     message: '',
@@ -84,6 +84,11 @@ export const reducer = (state: OneOfListsData[], { type, payload }: { type: stri
         case SET_STATE: {
             state[index] = data
             return [...state];
+        }
+        case ADD_ITEM: {
+            const newState = [...state];
+            newState.splice(index, 0, data);
+            return newState;
         }
         case DELETE_ITEM: {
             const stateCp = [...state]

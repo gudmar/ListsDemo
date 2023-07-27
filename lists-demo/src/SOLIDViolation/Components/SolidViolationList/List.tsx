@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useReducer, useState } from "react";
-import { iList, OneOfLists, OneOfListsData, tState } from "../../Types/types";
+import { iAddItem, iList, OneOfLists, OneOfListsData, tState } from "../../Types/types";
 import { notesContent } from "../../../Data/notesContent";
 import { toDoContent } from "../../../Data/toDoContent";
 import { picturesContent } from "../../../Data/picturesContent";
@@ -24,6 +24,22 @@ const getListTitle = (type: OneOfLists): string => {
     throw new Error(`Type ${type} is not supported yet`);
 }
 
+const AddItem = ({
+    index,
+    addItem,
+}: iAddItem) => {
+    const { theme } = useThemesAPI();
+    const classes = useListStyles(theme);
+    return (
+        <div
+            className={classes.addItem}
+            onClick={() => addItem(index)}
+        >
+            <span className={classes.addButton}>+</span>
+        </div>
+    )
+}
+
 const List = ({
     type
 }: iList) => {
@@ -41,6 +57,7 @@ const List = ({
         setIsDone,
         setDoneStage,
         deleteItem,
+        addItem,
     } = useListsState();
     
     useEffect(() => {
@@ -81,6 +98,7 @@ const List = ({
                 {
                     data.map((item, index) => {
                         return (
+                            <>
                             <ListItem
                                 type={type}
                                 data={item}
@@ -94,6 +112,18 @@ const List = ({
                                 editNote={(notes: string) => setNotes(notes, index)}
                                 deleteItem={() => deleteItem(index)}
                             />
+                            {
+                                (type===NOTES || type===TO_DOS) && 
+                                <AddItem
+                                    index={index}
+                                    addItem={
+                                        (index: number)=> {
+                                            addItem(data, index)
+                                        }
+                                    }
+                                / >
+                            }
+                            </>
                         )
                     })
                 }
