@@ -40,6 +40,7 @@ const List = ({
         setNotes,
         setIsDone,
         setDoneStage,
+        deleteItem,
     } = useListsState();
     
     useEffect(() => {
@@ -91,6 +92,7 @@ const List = ({
                                 }}
                                 editMessage={(notes: string) => setMessage(notes, index)}
                                 editNote={(notes: string) => setNotes(notes, index)}
+                                deleteItem={() => deleteItem(index)}
                             />
                         )
                     })

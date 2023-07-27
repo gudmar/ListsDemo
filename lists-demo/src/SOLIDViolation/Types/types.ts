@@ -18,13 +18,17 @@ export interface iListItem {
     setDoneStage?: tSetDoneStage,
     editNote?: tEditNote,
     editMessage?: tEditNote,
+    deleteItem?: () => void,
 }
 
 export interface iNoteListItem {
     data: NoteData,
     editMessage: tEditNote,
     id: number | string,
+    deleteItem?: () => void,
 }
+
+export type tDeleteItem = (index: number) => void;
 
 export interface iToDosListItem {
     message: string,
@@ -36,6 +40,7 @@ export interface iToDosListItem {
     setIsDone?: tSetIsDoneState,
     editMessage?: tEditNote,
     editNote?: tEditNote,
+    deleteItem?: () => void,
 }
 
 export interface iPicturesData {
@@ -68,5 +73,5 @@ export type tState = {
 
 export type tPayload = {
     index: number,
-    data: any,
+    data?: any,
 }
