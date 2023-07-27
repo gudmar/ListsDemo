@@ -7,12 +7,19 @@ import { PicturesData, ProgressType, ToDoData } from "../../../Types/dataTypes";
 import DeleteIcon from "../../../Icons/DeleteIcon"; 
 import { useStyles } from "./styles";
 
-const NoteListItem = ({data, editMessage}: iNoteListItem) => {
+const NoteListItem = ({data, editMessage, deleteItem}: iNoteListItem) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
+    const localClasses = useStyles();
     return (
-        <div className={classes.listItem} contentEditable onBlur={(e: any) => {editMessage(e.target.outerText)}}>
-            {data.message}
+        <div  className={classes.listItem}>
+            <DeleteIcon
+                className={`${localClasses.right} ${classes.pointer}`}
+                onClick={deleteItem}
+            />
+            <div className={classes.marginRight} contentEditable onBlur={(e: any) => {editMessage(e.target.outerText)}}>
+                {data.message}
+            </div>
         </div>
     )
 }
@@ -122,6 +129,7 @@ const ListItem = ({
                 data={data}
                 editMessage={editMessage!}
                 id={id}
+                deleteItem={deleteItem}
             />
         )
     } else {

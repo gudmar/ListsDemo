@@ -10,6 +10,11 @@ export interface iList {
     type: OneOfLists,
 }
 
+export interface iAddItem {
+    index: number,
+    addItem: (index: number) => void
+}
+
 export interface iListItem {
     type: OneOfLists,
     data: OneOfListsData,
