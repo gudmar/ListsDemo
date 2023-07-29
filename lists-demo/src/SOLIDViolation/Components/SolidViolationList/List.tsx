@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useReducer, useState } from "react";
+import { useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
 import { iAddItem, iList, OneOfLists, OneOfListsData, tState } from "../../Types/types";
 import { notesContent } from "../../../Data/notesContent";
 import { toDoContent } from "../../../Data/toDoContent";
@@ -9,6 +9,8 @@ import { useListStyles } from "../../../GlobalStyling/styleList";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import ListItem from "./ListItem";
 import { useListsState } from "./useListsState";
+import SearchBox from "../Search/SearchBox";
+import { useSearch } from "../Search/useSearch";
 
 const getData = (type: OneOfLists): OneOfListsData[] => {
     if (type === NOTES) return notesContent;
@@ -59,7 +61,7 @@ const List = ({
         deleteItem,
         addItem,
     } = useListsState();
-    
+    const searchRef = useRef(null);
     useEffect(() => {
         const getDataFromLocalStorage: <T = AnyObject>(key: string) => (null | T[]) = (key: string) => {
             const dataFromStorage:string | null = localStorage.getItem(key);
@@ -87,6 +89,15 @@ const List = ({
 
     useEffect(() => {console.log(data)}, [data])
 
+    const filterItem = (item: any, pattern: string) => {
+        console.log(item, pattern)
+        return item.message.includes(pattern);
+    }
+
+    const { filteredList, onPatternChange } = useSearch({searchboxReference: searchRef, list: data, isFoundFunction: filterItem })
+
+    useEffect(() => console.log(filteredList), [])
+
     return (
         <div className={`${classes.listWrapper} ${type===PHOTOS && classes.extraWidthForList}`}>
             <button onClick ={() => console.log(data)}>log data</button>
@@ -94,9 +105,15 @@ const List = ({
             <div className={classes.listTitle}>{getListTitle(type)}</div> 
             {/* //violation of open close principle with getListTitle and knowledge of type*/}
             {/* Also violation of DIP as this is a generic component and it should not know about type */}
+            <SearchBox
+                placeholder={'Search'}
+                ref={searchRef}
+                onPatternChange = {onPatternChange}
+            />
             <div className={classes.overflowAuto}>
                 {
-                    data.map((item, index) => {
+                    // data.map((item, index) => {
+                    filteredList.map((item: any, index: number) => {
                         return (
                             <>
                             <ListItem

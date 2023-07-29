@@ -52,13 +52,13 @@ const getStateWithModifiedMultiProps = ({index, propNames, state, data}: iStateM
         return readyObject
     }, objectToModify);
     state[index] = modifiedObject as OneOfListsData;
-    return state;
+    return [...state];
 }
 
 export const reducer = (state: OneOfListsData[], { type, payload }: { type: string, payload: tPayload} ): OneOfListsData[] => {
     const {data, index }: {data?: any, index: number} = payload;
-    console.log('%cSetting reducer', 'background-color: green; color: white; font-weight: bold; padding: 5px; border-radius: 4px')
-    console.log(type, payload)
+    // console.log('%cSetting reducer', 'background-color: green; color: white; font-weight: bold; padding: 5px; border-radius: 4px')
+    // console.log(type, payload)
     switch(type) {
         case EDIT_MESSAGE: {
             const resultState = getStateWithModifiedProp({index, data, state, propName: 'message'});
