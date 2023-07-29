@@ -7,6 +7,11 @@ export const EDIT_NOTES = 'edit notes';
 export const SET_STATE = 'set state';
 export const DELETE_ITEM = 'delete item';
 export const ADD_ITEM = 'add item';
+export const TOGGLE_CHART='toggle chart';
+
+export const toggleChartAction = (payload: tPayload) => ({
+    type: TOGGLE_CHART, payload
+})
 
 export const editMessageAction = (payload: tPayload) => ({
     type: EDIT_MESSAGE, payload

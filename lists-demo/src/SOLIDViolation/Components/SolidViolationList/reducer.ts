@@ -1,6 +1,6 @@
-import { AnyObject, ToDoData } from '../../../Types/dataTypes';
+import { AnyObject, PicturesData, ToDoData } from '../../../Types/dataTypes';
 import { tState, tPayload, OneOfListsData } from '../../Types/types';
-import { ADD_ITEM, DELETE_ITEM, EDIT_DONE_STAGE, EDIT_IS_DONE, EDIT_MESSAGE, EDIT_NOTES, SET_STATE } from './actions'
+import { ADD_ITEM, DELETE_ITEM, EDIT_DONE_STAGE, EDIT_IS_DONE, EDIT_MESSAGE, EDIT_NOTES, SET_STATE, TOGGLE_CHART } from './actions'
 
 export const getInitialState = ():OneOfListsData[] => [({
     message: '',
@@ -12,6 +12,7 @@ export const getInitialState = ():OneOfListsData[] => [({
     price: 0,
     stockLevel: 0,
     imageName: '',
+    isInChart: false,
 })]
 
 const getDoneStageWhenIsDoneChanged = ({state, payload, index}: {state: OneOfListsData[], payload: tPayload, index: number}) => {
@@ -94,6 +95,12 @@ export const reducer = (state: OneOfListsData[], { type, payload }: { type: stri
             const stateCp = [...state]
             stateCp.splice(index, 1);
             return [...stateCp];
+        }
+        case TOGGLE_CHART: {
+            const stateCp = [...state]
+            const objectToModify: PicturesData = state[index] as PicturesData
+            stateCp[index] = {...stateCp[index], isInChart: !objectToModify.isInChart}
+            return stateCp;
         }
         default: throw new Error('Unpossible')
     }

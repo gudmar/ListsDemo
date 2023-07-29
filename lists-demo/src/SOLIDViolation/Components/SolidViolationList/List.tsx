@@ -58,6 +58,7 @@ const List = ({
         setNotes,
         setIsDone,
         setDoneStage,
+        toggleChart,
         deleteItem,
         addItem,
     } = useListsState();
@@ -128,6 +129,7 @@ const List = ({
                                 editMessage={(notes: string) => setMessage(notes, index)}
                                 editNote={(notes: string) => setNotes(notes, index)}
                                 deleteItem={() => deleteItem(index)}
+                                toggleChart={() => toggleChart(index)}
                             />
                             {
                                 (type===NOTES || type===TO_DOS) && 
