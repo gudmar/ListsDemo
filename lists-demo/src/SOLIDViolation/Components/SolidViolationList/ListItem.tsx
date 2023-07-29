@@ -6,6 +6,8 @@ import { CustomTheme } from '../../../Types/themes'
 import { PicturesData, ProgressType, ToDoData } from "../../../Types/dataTypes";
 import DeleteIcon from "../../../Icons/DeleteIcon"; 
 import { useStyles } from "./styles";
+import RemoveShoppingChartIcon from "../../../Icons/RemoveShoppingChartIcon";
+import AddShoppingChartIcon from "../../../Icons/AddShoppingChartIcon";
 
 const NoteListItem = ({data, editMessage, deleteItem}: iNoteListItem) => {
     const { theme } = useThemesAPI();
@@ -83,13 +85,21 @@ const PhotoListItem = ({
     message,
     stockLevel,
     imageName,
+    isInChart,
+    toggleChart,
     id,
 }: iPicturesData) => {
     const { theme }: { theme: CustomTheme } = useThemesAPI();
     const classes = useListStyles(theme);
     return (
         <div className={classes.listItem}>
-            <div className={classes.pictureTitle}>{title}</div>
+            <div className={classes.pictureHeader}>
+                <div className={classes.pictureTitle}>{title}</div>
+                <div className={classes.shoppingChartItem} onClick={() => { toggleChart(); console.log('Togging') }}>
+                    {isInChart ? <RemoveShoppingChartIcon />: <AddShoppingChartIcon />}
+                </div>
+            </div>
+            
             <hr/>
             <div className={classes.picturePrice}>Buy for: ${price}</div>
             <div className={classes.pictureMessage}>{message}</div>
@@ -106,7 +116,7 @@ const PhotoListItem = ({
 }
 
 const ListItem = ({
-    type, data, id, setIsDone, setDoneStage, editMessage, editNote, deleteItem,
+    type, data, id, setIsDone, setDoneStage, editMessage, editNote, deleteItem, toggleChart,
 }: iListItem) => {
     if (type === TO_DOS) {
         return (
@@ -140,6 +150,8 @@ const ListItem = ({
                 message = {(data as PicturesData).message}
                 stockLevel = {(data as PicturesData).stockLevel}
                 imageName = {(data as PicturesData).imageName}
+                isInChart = {(data as PicturesData).isInChart}
+                toggleChart = {toggleChart!}
                 id={id} 
             />
         )

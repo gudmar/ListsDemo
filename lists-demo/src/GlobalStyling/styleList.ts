@@ -172,6 +172,14 @@ export const useListStyles = createUseStyles({
     overflowAuto: {
         height: `calc(100vh - ${TITLE_LOST})`,
         overflow: 'auto'
+    },
+
+    pictureHeader: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
+    shoppingChartItem: {
+
     }
 
 })

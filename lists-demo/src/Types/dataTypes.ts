@@ -17,6 +17,8 @@ export type PicturesData = {
     message: string,
     stockLevel: ProgressType,
     imageName: string,
+    isInChart: boolean,
+    toggleChart: () => void,
 }
 
 export interface AnyObject {

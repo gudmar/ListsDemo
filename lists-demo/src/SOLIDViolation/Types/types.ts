@@ -24,6 +24,7 @@ export interface iListItem {
     editNote?: tEditNote,
     editMessage?: tEditNote,
     deleteItem?: () => void,
+    toggleChart?: () =>  void
 }
 
 export interface iNoteListItem {
@@ -54,7 +55,9 @@ export interface iPicturesData {
     message: string,
     stockLevel: ProgressType,
     imageName: string,
+    isInChart: boolean,
     id: number | string,
+    toggleChart: () => void,
 }
 
 export interface iDoneStage {
