@@ -1,3 +1,4 @@
+import { ReactChild } from 'react';
 import { NoteData, PicturesData, ProgressType, ToDoData } from '../../Types/dataTypes'
 
 export type OneOfLists = "Notes" | "ToDoList" | "Photos"
@@ -5,6 +6,8 @@ export type OneOfLists = "Notes" | "ToDoList" | "Photos"
 export type tSetDoneStage = (val: ProgressType) => void;
 export type tSetIsDoneState = (val:boolean) => void;
 export type tEditNote = (newValue: string) => void;
+
+export type tChildren = ReactChild | ReactChild[]
 
 export interface iList {
     type: OneOfLists,
@@ -82,4 +85,10 @@ export type tState = {
 export type tPayload = {
     index: number,
     data?: any,
+}
+
+export interface iModal {
+    children: tChildren,
+    isOpen: boolean,
+    setClose: () => void,
 }

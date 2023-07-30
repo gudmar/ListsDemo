@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
-import { iAddItem, iList, OneOfLists, OneOfListsData, tState } from "../../Types/types";
+import { Children, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
+import { iAddItem, iList, iListItem, iPicturesData, OneOfLists, OneOfListsData, tState } from "../../Types/types";
 import { notesContent } from "../../../Data/notesContent";
 import { toDoContent } from "../../../Data/toDoContent";
 import { picturesContent } from "../../../Data/picturesContent";
@@ -11,6 +11,9 @@ import ListItem from "./ListItem";
 import { useListsState } from "./useListsState";
 import SearchBox from "../Search/SearchBox";
 import { useSearch } from "../Search/useSearch";
+import ShoppingChartIcon from "../../../Icons/ShoppingChartIcon";
+import Modal from "../Modal/Modal";
+import { useModal } from "../../hooks/useModal";
 
 const getData = (type: OneOfLists): OneOfListsData[] => {
     if (type === NOTES) return notesContent;
@@ -42,10 +45,51 @@ const AddItem = ({
     )
 }
 
+const isPictureType = (items: OneOfListsData[]) => {
+    const iPictureKeys = ['title', 'price', 'stockLevel']
+    const isEveryTypePicture = items.every((item: any) => {
+        if (iPictureKeys.some((key: string) => (item[key] === undefined))) {
+            return false
+        }
+        return true;
+    })
+    return isEveryTypePicture;
+}
+
+const ChartContent = ({items}: {items: OneOfListsData[]}) => {
+    const isPicture = isPictureType(items);
+    if (!isPicture) return (<></>)
+    const boughtItems = items.filter((item) => (item as iPicturesData).isInChart)
+    return (
+        <>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th><th>title</th><th>price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        boughtItems.map((item, index) => (
+                            <tr>
+                                <td>{index}</td>
+                                <td>{(item as iPicturesData).title}</td>
+                                <td>{(item as iPicturesData).price}</td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </>
+    )
+}
+
 const List = ({
     type
 }: iList) => {
     window['React2' as any] = require('react');
+
+    
     
     // const [data, setData] = useState<OneOfListsData[]>([])
     const { theme } = useThemesAPI();
@@ -62,6 +106,7 @@ const List = ({
         deleteItem,
         addItem,
     } = useListsState();
+    const {modal: Modal, open: openModal} = useModal(<ChartContent items={data}/>)
     const searchRef = useRef(null);
     useEffect(() => {
         const getDataFromLocalStorage: <T = AnyObject>(key: string) => (null | T[]) = (key: string) => {
@@ -100,10 +145,14 @@ const List = ({
     useEffect(() => console.log(filteredList), [])
 
     return (
-        <div className={`${classes.listWrapper} ${type===PHOTOS && classes.extraWidthForList}`}>
+            <div className={`${classes.listWrapper} ${type===PHOTOS && classes.extraWidthForList}`}>
+                {Modal}
             <button onClick ={() => console.log(data)}>log data</button>
             {/* Violation of DIP with this type prop */}
-            <div className={classes.listTitle}>{getListTitle(type)}</div> 
+            <div className={classes.pictureHeader}>
+                <div className={classes.listTitle}>{getListTitle(type)}</div>
+                {type === PHOTOS && <ShoppingChartIcon className={`${classes.center} ${classes.marginRight}`} onClick={openModal}/>}
+            </div>
             {/* //violation of open close principle with getListTitle and knowledge of type*/}
             {/* Also violation of DIP as this is a generic component and it should not know about type */}
             <SearchBox
