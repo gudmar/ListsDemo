@@ -180,6 +180,5 @@ export const useListStyles = createUseStyles({
     },
     shoppingChartItem: {
 
-    }
-
+    },
 })
