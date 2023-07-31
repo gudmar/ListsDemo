@@ -1,13 +1,22 @@
+import { useState } from "react";
+import RemoveShoppingChartIcon from "../../../Icons/RemoveShoppingChartIcon";
 import { iPicturesData, OneOfListsData } from "../../Types/types";
 import { useStyles } from "./styles";
 import { getBoughtItems, isPictureType } from "./utils";
 
+const removeBoughtItem = (items: OneOfListsData[], index: number, setItemsFunction: (items: iPicturesData[]) => void) => {
+    const previousBoughtItems = getBoughtItems(items as iPicturesData[]);
+    (previousBoughtItems as iPicturesData[])[index].isInChart = false;
+    const boughtItems = [...getBoughtItems(items as iPicturesData[])]
+    console.log(index, boughtItems, items)
+    setItemsFunction(boughtItems as iPicturesData[]);
+}
 
 const ChartContent = ({items}: {items: OneOfListsData[]}) => {
+    const [boughtItems, setBoughtItems] = useState(getBoughtItems(items))
     const classes = useStyles();
     const isPicture = isPictureType(items);
     if (!isPicture) return (<></>)
-    const boughtItems = getBoughtItems(items);
     if (!boughtItems.length) return (<>Nothing added to chart</>)
     return (
         <div className={classes.tableContainer}>
@@ -20,6 +29,7 @@ const ChartContent = ({items}: {items: OneOfListsData[]}) => {
                 <div className={classes.th}>Title</div>
                 <div className={classes.th}>Preview</div>
                 <div className={classes.th}>Price</div>
+                <div className={classes.th}>Remove</div>
             </div>
             <div className={classes.tableBody}>
                 {
@@ -29,6 +39,12 @@ const ChartContent = ({items}: {items: OneOfListsData[]}) => {
                             <div className={classes.td}>{(item as iPicturesData).title}</div>
                             <div className={classes.td}><img className={classes.thumbnail} src={`./${(item as iPicturesData).imageName}`} alt={''} /></div>
                             <div className={classes.td}>${(item as iPicturesData).price}</div>
+                            <div className={classes.td}>
+                                <RemoveShoppingChartIcon 
+                                    className={classes.bin} 
+                                    onClick={() => removeBoughtItem(items, index, setBoughtItems)}
+                                />
+                            </div>
                         </>
                         ),
                     )
