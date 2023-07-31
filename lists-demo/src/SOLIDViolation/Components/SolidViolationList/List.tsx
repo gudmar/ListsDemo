@@ -1,5 +1,5 @@
-import { Children, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
-import { iAddItem, iList, iListItem, iPicturesData, OneOfLists, OneOfListsData, tState } from "../../Types/types";
+import { useEffect, useRef } from "react";
+import { iAddItem, iList, OneOfLists, OneOfListsData } from "../../Types/types";
 import { notesContent } from "../../../Data/notesContent";
 import { toDoContent } from "../../../Data/toDoContent";
 import { picturesContent } from "../../../Data/picturesContent";
@@ -14,6 +14,7 @@ import { useSearch } from "../Search/useSearch";
 import ShoppingChartIcon from "../../../Icons/ShoppingChartIcon";
 import Modal from "../Modal/Modal";
 import { useModal } from "../../hooks/useModal";
+import ChartContent from "../ChartContent/ChartContent";
 
 const getData = (type: OneOfLists): OneOfListsData[] => {
     if (type === NOTES) return notesContent;
@@ -45,44 +46,10 @@ const AddItem = ({
     )
 }
 
-const isPictureType = (items: OneOfListsData[]) => {
-    const iPictureKeys = ['title', 'price', 'stockLevel']
-    const isEveryTypePicture = items.every((item: any) => {
-        if (iPictureKeys.some((key: string) => (item[key] === undefined))) {
-            return false
-        }
-        return true;
-    })
-    return isEveryTypePicture;
-}
+// const openModalIfReport = (items: OneOfListsData[], openFunction: ()=>{} ) => {
+//     if (shouldDisplayBoughtReport(items)) openFunction();
+// }
 
-const ChartContent = ({items}: {items: OneOfListsData[]}) => {
-    const isPicture = isPictureType(items);
-    if (!isPicture) return (<></>)
-    const boughtItems = items.filter((item) => (item as iPicturesData).isInChart)
-    return (
-        <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th><th>title</th><th>price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        boughtItems.map((item, index) => (
-                            <tr>
-                                <td>{index}</td>
-                                <td>{(item as iPicturesData).title}</td>
-                                <td>{(item as iPicturesData).price}</td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
-        </>
-    )
-}
 
 const List = ({
     type
@@ -90,11 +57,8 @@ const List = ({
     window['React2' as any] = require('react');
 
     
-    
-    // const [data, setData] = useState<OneOfListsData[]>([])
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
-    // const classes = {listWrapper: '', extraWidthForList: '', overflowAuto: '', listTitle: ''}
     const {
         data,
         setState,
@@ -119,11 +83,6 @@ const List = ({
             }
         }
         const dataFromStorage = getDataFromLocalStorage<OneOfListsData>(type);
-        // const initialData = getData(type)
-        // const dataSource = dataFromStorage || initialData;
-        // console.log(dataFromStorage)
-        // console.log(initialData)
-        // dataSource.forEach((data: OneOfListsData, index: number) => setState(data, index))        
         if (!dataFromStorage) {
             const initialData = getData(type)
             initialData.forEach((data: OneOfListsData, index: number) => setState(data, index))
@@ -133,16 +92,12 @@ const List = ({
         
     }, []) // LOAD DATA. Violates DIP
 
-    useEffect(() => {console.log(data)}, [data])
-
     const filterItem = (item: any, pattern: string) => {
         console.log(item, pattern)
         return item.message.includes(pattern);
     }
 
     const { filteredList, onPatternChange } = useSearch({searchboxReference: searchRef, list: data, isFoundFunction: filterItem })
-
-    useEffect(() => console.log(filteredList), [])
 
     return (
             <div className={`${classes.listWrapper} ${type===PHOTOS && classes.extraWidthForList}`}>
