@@ -96,7 +96,16 @@ const PhotoListItem = ({
             <div className={classes.pictureHeader}>
                 <div className={classes.pictureTitle}>{title}</div>
                 <div className={classes.shoppingChartItem} onClick={() => { toggleChart(); console.log('Togging') }}>
-                    {isInChart ? <RemoveShoppingChartIcon />: <AddShoppingChartIcon />}
+                    <div className={`${classes.center} ${classes.marginRight}`}>
+                        {isInChart ? 
+                            <RemoveShoppingChartIcon
+                                className={classes.cursorPointer}
+                            />: 
+                            <AddShoppingChartIcon
+                                className={classes.cursorPointer}
+                            />
+                        }
+                    </div>
                 </div>
             </div>
             

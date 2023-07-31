@@ -105,7 +105,10 @@ const List = ({
             {/* Violation of DIP with this type prop */}
             <div className={classes.pictureHeader}>
                 <div className={classes.listTitle}>{getListTitle(type)}</div>
-                {type === PHOTOS && <ShoppingChartIcon className={`${classes.center} ${classes.marginRight}`} onClick={openModal}/>}
+                {type === PHOTOS && <div className={`${classes.center} ${classes.marginRight}`}>
+                    <ShoppingChartIcon className={`${classes.cursorPointer}`} onClick={openModal}/>
+                </div>
+            }
             </div>
             {/* //violation of open close principle with getListTitle and knowledge of type*/}
             {/* Also violation of DIP as this is a generic component and it should not know about type */}
