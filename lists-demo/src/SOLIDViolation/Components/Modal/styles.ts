@@ -24,5 +24,6 @@ export const useStyles = createUseStyles({
         opacity: '1',
         zIndex: '1100',
         borderRadius: '1rem',
+        overflow: 'auto',
     }
 });
