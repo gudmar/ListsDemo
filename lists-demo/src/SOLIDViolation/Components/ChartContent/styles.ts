@@ -30,12 +30,12 @@ export const useStyles = createUseStyles({
     },
     tableHead: {
         display: 'grid',
-        gridTemplateColumns: '1fr 4fr 4fr 1fr'
+        gridTemplateColumns: '1fr 4fr 4fr 1fr 1fr'
     },
     tableBody: {
         display: 'grid',
         height: '70%',
-        gridTemplateColumns: '1fr 4fr 4fr 1fr',
+        gridTemplateColumns: '1fr 4fr 4fr 1fr 1fr',
         overflow: 'auto',
         width: '100.5%'
 
@@ -44,7 +44,6 @@ export const useStyles = createUseStyles({
         width: '100%'
     },
     td: {
-        // display: 'inline-block',
         border: '0.125rem solid white',
         textAlign: 'center',
         display: 'flex',
@@ -52,26 +51,28 @@ export const useStyles = createUseStyles({
         justifyContent: 'center',
         fontSize: '2rem',
         color: '#555555',
-        '&:nth-child(8n+5)': {
+        '&:nth-child(10n+6)': {
             backgroundColor: TABLE_BG
         },
-        '&:nth-child(8n+6)': {
+        '&:nth-child(10n+7)': {
             backgroundColor: TABLE_BG
         },
 
-        '&:nth-child(8n+7)': {
+        '&:nth-child(10n+8)': {
             backgroundColor: TABLE_BG
         },
-        '&:nth-child(8n+8)': {
+        '&:nth-child(10n+9)': {
             backgroundColor: TABLE_BG
         },
-        '&:nth-child(4n+2)': {
+        '&:nth-child(10n+10)': {
+            backgroundColor: TABLE_BG
+        },
+        '&:nth-child(5n+2)': {
             fontWeight: 'bold',
-            
         },
-
-
-
+    },
+    bin: {
+        cursor: 'pointer',
     }
 
 });

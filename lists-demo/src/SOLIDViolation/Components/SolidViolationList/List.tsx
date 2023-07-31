@@ -102,7 +102,6 @@ const List = ({
     return (
             <div className={`${classes.listWrapper} ${type===PHOTOS && classes.extraWidthForList}`}>
                 {Modal}
-            <button onClick ={() => console.log(data)}>log data</button>
             {/* Violation of DIP with this type prop */}
             <div className={classes.pictureHeader}>
                 <div className={classes.listTitle}>{getListTitle(type)}</div>

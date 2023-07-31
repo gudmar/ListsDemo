@@ -8,7 +8,7 @@ const Modal = ({children, isOpen, setClose}: iModal) => {
     if (!isOpen) return (<></>)
     return createPortal((
         <div className={classes.wrapper} onClick={setClose}>
-            <div className={classes.info}>
+            <div className={classes.info} onClick={(event)=>{event.stopPropagation()}}>
                 {children}
             </div>
         </div>
