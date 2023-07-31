@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useThemesAPI } from "../../../Context/useThemeAPI";
+import { useListStyles } from "../../../GlobalStyling/styleList";
 import RemoveShoppingChartIcon from "../../../Icons/RemoveShoppingChartIcon";
 import { iPicturesData, OneOfListsData } from "../../Types/types";
 import { useStyles } from "./styles";
@@ -15,6 +17,8 @@ const removeBoughtItem = (items: OneOfListsData[], index: number, setItemsFuncti
 const ChartContent = ({items}: {items: OneOfListsData[]}) => {
     const [boughtItems, setBoughtItems] = useState(getBoughtItems(items))
     const classes = useStyles();
+    const { theme } = useThemesAPI();
+    const classesGlobal = useListStyles(theme);
     const isPicture = isPictureType(items);
     if (!isPicture) return (<></>)
     if (!boughtItems.length) return (<>Nothing added to chart</>)
@@ -41,7 +45,7 @@ const ChartContent = ({items}: {items: OneOfListsData[]}) => {
                             <div className={classes.td}>${(item as iPicturesData).price}</div>
                             <div className={classes.td}>
                                 <RemoveShoppingChartIcon 
-                                    className={classes.bin} 
+                                    className={`${classes.bin} ${classesGlobal.cursorPointer}`}
                                     onClick={() => removeBoughtItem(items, index, setBoughtItems)}
                                 />
                             </div>

@@ -181,4 +181,19 @@ export const useListStyles = createUseStyles({
     shoppingChartItem: {
 
     },
+    cursorPointer: {
+        cursor: 'pointer',
+        transitionDelay: '0.3s',
+        borderRadius: '50%',
+        width: '2rem',
+        height: '2rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '0.3rem',
+        '&:hover': {
+            backgroundColor: '#33333333',
+            transitionDelay: '0.3s'
+        }
+    }
 })
