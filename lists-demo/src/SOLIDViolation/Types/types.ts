@@ -11,6 +11,7 @@ export type tChildren = ReactChild | ReactChild[]
 
 export interface iList {
     type: OneOfLists,
+    doWithState?: (nextState: any) => void
 }
 
 export interface iAddItem {

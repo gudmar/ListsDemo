@@ -51,8 +51,22 @@ const AddItem = ({
 // }
 
 
+const useDoWithStateHandler = (doWithStateFunction: (nextState:any) => void, state: any) => {
+    useEffect(() => {
+        console.log(doWithStateFunction)
+        doWithStateFunction(state);
+    }, [state ,doWithStateFunction])
+}
+
+const flush = (val: any) => {}
+
 const List = ({
-    type
+    type, doWithState
+    // doWithState LOOKS LIKE violation of single responsibility principle,
+    // what parent wants to do with the state? 
+    // This is just a setter of the state in reality, but 
+    // second place where state is kept smells bad.
+    // If state if fetched by LIST, why it is saved by parent?
 }: iList) => {
     window['React2' as any] = require('react');
 
@@ -70,9 +84,14 @@ const List = ({
         deleteItem,
         addItem,
     } = useListsState();
+
+    useDoWithStateHandler(doWithState || flush, data);
+
     const {modal: Modal, open: openModal} = useModal(<ChartContent items={data}/>)
     const searchRef = useRef(null);
     useEffect(() => {
+        // DIP violation, list knows how to fetch data, and fetches it. 
+        // It knows about ALL data types it may store!!
         const getDataFromLocalStorage: <T = AnyObject>(key: string) => (null | T[]) = (key: string) => {
             const dataFromStorage:string | null = localStorage.getItem(key);
             if (dataFromStorage === null) {
