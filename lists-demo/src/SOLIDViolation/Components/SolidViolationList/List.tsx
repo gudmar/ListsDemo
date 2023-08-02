@@ -15,6 +15,7 @@ import ShoppingChartIcon from "../../../Icons/ShoppingChartIcon";
 import Modal from "../Modal/Modal";
 import { useModal } from "../../hooks/useModal";
 import ChartContent from "../ChartContent/ChartContent";
+import AddIcon from "../../../Icons/Add";
 
 const getData = (type: OneOfLists): OneOfListsData[] => {
     if (type === NOTES) return notesContent;
@@ -45,11 +46,6 @@ const AddItem = ({
         </div>
     )
 }
-
-// const openModalIfReport = (items: OneOfListsData[], openFunction: ()=>{} ) => {
-//     if (shouldDisplayBoughtReport(items)) openFunction();
-// }
-
 
 const useDoWithStateHandler = (doWithStateFunction: (nextState:any) => void, state: any) => {
     useEffect(() => {
@@ -112,7 +108,6 @@ const List = ({
     }, []) // LOAD DATA. Violates DIP
 
     const filterItem = (item: any, pattern: string) => {
-        console.log(item, pattern)
         return item.message.includes(pattern);
     }
 
@@ -125,9 +120,14 @@ const List = ({
             <div className={classes.pictureHeader}>
                 <div className={classes.listTitle}>{getListTitle(type)}</div>
                 {type === PHOTOS && <div className={`${classes.center} ${classes.marginRight}`}>
-                    <ShoppingChartIcon className={`${classes.cursorPointer}`} onClick={openModal}/>
-                </div>
-            }
+                        <ShoppingChartIcon className={`${classes.cursorPointer}`} onClick={openModal}/>
+                    </div>
+                }
+                {(type === NOTES || type === TO_DOS) && <div className={`${classes.center} ${classes.marginRight}`}>
+                        <AddIcon className={`${classes.cursorPointer}`} onClick={() => addItem(data, 0)}/>
+                    </div>
+                }
+
             </div>
             {/* //violation of open close principle with getListTitle and knowledge of type*/}
             {/* Also violation of DIP as this is a generic component and it should not know about type */}
