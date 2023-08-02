@@ -23,19 +23,10 @@ export const useSearch = ({
 }: iUseSearch) => {
     const [filteredList, setFilteredList] = useState(list || []);
     const [pattern, setPattern] = useState('');
-    useEffect(() => console.log(filteredList), [filteredList])
-    useEffect(() => console.log(list), [list])
     useEffect(() => {
         const newFilteredList = search({list, pattern, isFoundFunction})
         setFilteredList(newFilteredList);
     }, [list, pattern, isFoundFunction])
-    // const search = useCallback(() => {
-    //     const resultFunction = searchGenerator(list, filterItem);
-    //     return resultFunction;
-    // }, [list, filterItem])
-    // useEffect(() => {
-    //     searchboxReference.current.subscribe(search)
-    // }, [searchboxReference.current, setFilteredList, searchboxReference])
    return {
     filteredList,
     onPatternChange: (pattern: string) => {setPattern(pattern)}
