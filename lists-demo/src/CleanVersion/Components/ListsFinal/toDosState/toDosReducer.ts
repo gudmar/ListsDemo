@@ -9,8 +9,8 @@ export const getInitialTodosState = ():ToDoData[] => [({
     notes: '',
 })]
 
-export const todosReducer = (state: ToDoData[], { type, payload }: { type: string, payload: tPayload} ): ToDoData[] => {
-    const {data, index }: {data?: any, index: number} = payload;
+export const todosReducer = (state: ToDoData[], { type, payload }: { type: string, payload: tPayload | ToDoData[]} ): ToDoData[] => {
+    const {data, index }: {data?: any, index: number} = payload as tPayload;
     switch(type) {
         case EDIT_TODOS_MESSAGE: {
             const resultState = getStateWithModifiedProp({index, data, state, propName: 'message'}) as ToDoData[];
@@ -28,13 +28,13 @@ export const todosReducer = (state: ToDoData[], { type, payload }: { type: strin
             return [...state];
         
         case EDIT_TODOS_IS_DONE: {
-            const newDoneStage = getDoneStageWhenIsDoneChanged({state, payload, index})
+            const newDoneStage = getDoneStageWhenIsDoneChanged({state, payload: payload as tPayload, index})
             const objectToModify: ToDoData = state[index];
             state[index] = {...objectToModify, doneStage: newDoneStage, isDone: data}
             return [...state];
         }
         case SET_TODOS_STATE: {
-            state[index] = data
+            state = payload as ToDoData[]
             return [...state];
         }
         case ADD_TODOS_ITEM: {
