@@ -8,8 +8,6 @@ const TITLE_LOST = '4.5rem';
 export const useListStyles = createUseStyles({
     board: (theme: CustomTheme) => ({
         backgroundColor: theme.customBackground,
-        // overflow: 'auto',
-        // width: '100vw',
         height: '100vh',
         fontFamily: theme.customFontStyles,
         color: theme.customColor,
@@ -24,6 +22,26 @@ export const useListStyles = createUseStyles({
             cursor: 'pointer'
         }
     },
+    button: (theme: CustomTheme) => ({
+            color: theme.saveButtonColor,
+            backgroundColor: theme.saveButtonBackground,
+            borderRadius: '0.5rem',
+            height: '2rem',
+            lineHeight: '2rem',
+            fontSize: '1.5rem',
+            textAlign: 'center',
+            display: 'inline-block',
+            cursor: 'pointer',
+            padding: '0 1rem 0 1rem',
+            marginLeft: '1rem',
+            fontWeight: 'bold',
+            '&:hover': {
+                backgroundColor: theme.saveButtonBgHover
+            },
+            '&:active': {
+                backgroundColor: theme.saveButtonBgActive
+            }
+    }),
     addButton: {
         width: '1.5rem',
         height: '1.5rem',

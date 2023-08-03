@@ -12,7 +12,7 @@ export const SOLIDViolationList = () => {
     } = useSave();
     return(
         <>
-        <button onClick={save}>Save</button>
+        <div className={classes.button} onClick={save}>Save</div>
             <div className={classes.board}>
                 <List
                     type={NOTES}

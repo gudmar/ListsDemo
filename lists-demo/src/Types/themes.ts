@@ -6,6 +6,10 @@ export type CustomTheme = {
     customNavBackground: string,
     listItemHoverBackground: string,
     listTitleColor: string,
+    saveButtonColor: string,
+    saveButtonBackground: string,
+    saveButtonBgHover: string,
+    saveButtonBgActive: string,
 }
 
 export type NamedTheme = {

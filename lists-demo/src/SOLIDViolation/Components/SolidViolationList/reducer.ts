@@ -1,5 +1,5 @@
 import { AnyObject, PicturesData, ToDoData } from '../../../Types/dataTypes';
-import { tState, tPayload, OneOfListsData } from '../../Types/types';
+import { tPayload, OneOfListsData } from '../../Types/types';
 import { ADD_ITEM, DELETE_ITEM, EDIT_DONE_STAGE, EDIT_IS_DONE, EDIT_MESSAGE, EDIT_NOTES, SET_STATE, TOGGLE_CHART } from './actions'
 
 export const getInitialState = ():OneOfListsData[] => [({

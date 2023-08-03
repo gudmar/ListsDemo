@@ -24,3 +24,12 @@ export type PicturesData = {
 export interface AnyObject {
     [key: string]: any
 }
+
+export type tPayload = {
+    index: number,
+    data?: any,
+}
+
+
+
+// ==============================================
