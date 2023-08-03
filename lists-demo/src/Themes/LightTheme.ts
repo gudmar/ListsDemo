@@ -11,7 +11,11 @@ export const LightNamedTheme: NamedTheme = {
         customColor: '#222',
         customNavBackground: '#AAA',
         listItemHoverBackground: '#DDDDDD',
-        listTitleColor: '#000010'
+        listTitleColor: '#000010',
+        saveButtonColor: '#222255',
+        saveButtonBackground: '#66EE66',
+        saveButtonBgHover: '#449944',
+        saveButtonBgActive: '#88FF88',
     }, 
     name: LIGHT_THEME,
 }

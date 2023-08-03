@@ -21,3 +21,27 @@ stay (class names), but maikinng some styling injectable (DIP) makes it easy to 
         only a copy. However in most cases state should be keept ONLY in a single place
 * If list downloads data, why it does not save?
 Why parent has to save? Because data has to be in the same format, parent will have to save each list separately anyway
+
+* Merging whole state is violation of index segregation principle. If nots, doDos, pictures are not related, their states should be managed and stored separetely.
+        - Too big state is complexed, and error prone. Too many possible dependencies,that may be messed up,
+        - Difficulty to add new list (meging into existing state is against open/close)
+        - Removing some list / state part difficult
+        - Each list knows about things it does not need
+
+* OneOfListsData type should look suspicious, as it is a union of NoteData | ToDoData | PicturesData, and this may indicate interface segregation problem.
+Union is good for generic functions like getStateWithModifiedProp that switches a
+element in a list of elements  to create a new state. This is good, as this function
+never looks inside processed data. It does not care what type of data is stored in
+elements of lists it handles
+
+
+====================
+
+After cleaning:
+
+* When defining type of the 'list' items. Should it be 'Any'? Otherwise when adding new type, means editing some type file, and probably a lot of other files
+* Types in TS: should considere changes here, as change to one type causes changes to lot of types
+* Break huge state into separate reducers
+
+
+

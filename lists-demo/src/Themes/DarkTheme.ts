@@ -11,7 +11,12 @@ export const DarkNamedTheme: NamedTheme = {
         customColor: '#fff',
         customNavBackground: '#444',
         listItemHoverBackground: '#DDDDDD',
-        listTitleColor: '#D0D0E0'
+        listTitleColor: '#D0D0E0',
+        saveButtonColor: '#DDDD99',
+        saveButtonBackground: '#228822',
+        saveButtonBgHover: '#115511',
+        saveButtonBgActive: '#55BB55',
+
     }, 
     name: DARK_THEME,
 }
