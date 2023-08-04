@@ -1,9 +1,26 @@
+import { FC } from "react"
 
-const SearchableList = () => {
-    return (
-        <>
-        </>
-    )
+type tDoWithItem = (index: number, item: any) => void;
+
+interface iListItem {
+    items: any[],
+    addItem: tDoWithItem,
+    editItem: tDoWithItem,
+    deleteItem: (index: number) => void,
+    setItems: (items: any[]) => void
 }
 
-export default SearchableList
+const withSearchableList = (ListItem: FC<any>) => ({
+    items,
+    addItem,
+    deleteItem,
+    setItems,
+    editItem,
+}: iListItem) => {
+    const List = () => {
+        new Error('Implement this')
+    }
+    return List
+}
+
+export default withSearchableList

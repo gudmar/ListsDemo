@@ -1,7 +1,7 @@
 import { PicturesData, tPayload } from "../../../../Types/dataTypes";
-import { SET_GALERY_STATE, TOGGLE_GALERY_CHART } from "./galeryActions";
+import { SET_GALLERY_STATE, TOGGLE_GALLERY_CHART } from "./galleryActions";
 
-export const getInitialGaleryState = ():PicturesData[] => [({
+export const getInitialGalleryState = ():PicturesData[] => [({
     message: '',
     title: '',
     price: 0,
@@ -11,14 +11,15 @@ export const getInitialGaleryState = ():PicturesData[] => [({
     toggleChart: () => {}  // REMOVE THIS, WHAT IS THIS?
 })]
 
-export const galeryReducer = (state: PicturesData[], { type, payload }: { type: string, payload: tPayload} ): PicturesData[] => {
-    const {data, index }: {data?: any, index: number} = payload;
+export const galleryReducer = (state: PicturesData[], { type, payload }: { type: string, payload: tPayload | PicturesData[]} ): PicturesData[] => {
+    const { index }: { index: number} = payload as tPayload;
+    // IS this not a violation of Liskov subtype principle? data is omited
     switch(type) {
-        case SET_GALERY_STATE: {
-            state[index] = data
+        case SET_GALLERY_STATE: {
+            state = payload as PicturesData[]
             return [...state];
         }
-        case TOGGLE_GALERY_CHART: {
+        case TOGGLE_GALLERY_CHART: {
             const stateCp = [...state]
             const objectToModify: PicturesData = state[index] as PicturesData
             stateCp[index] = {...stateCp[index], isInChart: !objectToModify.isInChart}
