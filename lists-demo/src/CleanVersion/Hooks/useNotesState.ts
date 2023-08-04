@@ -9,7 +9,7 @@ export const useNotesState = () => {
     const [state, dispatch] = useReducer(notesReducer, getInitialNotesState());
     const {data} = useLoadData(getInitialNotesState(), LOCAL_STORAGE_NOTES)
     useEffect(() => {
-        setNotesStateAction(data)
+        setNotes(data)
     }, [data])
     const editNote = (notes: string, index: number) => dispatch(editNotesMessageAction({data: notes, index}));
     const addNote = (initialState: NoteData, index: number) => dispatch(addNotesItemAction({data: initialState, index}))

@@ -10,7 +10,7 @@ export const useTodosState = () => {
     const [state, dispatch] = useReducer(todosReducer, getInitialTodosState());
     const {data} = useLoadData(getInitialTodosState(), LOCAL_STORAGE_TODOS)
     useEffect(() => {
-        setTodosStateAction(data)
+        setTodosState(data)
     }, [data])
     const editTodosMessage = (index: number, newMessage: string) => dispatch(editTodosMessageAction({data: newMessage, index}))
     const editTodosNotes = (index: number, newNote: string) => dispatch(editTodosNotesAction({data: newNote, index}))
