@@ -3,7 +3,7 @@ import { useListStyles } from "../../../GlobalStyling/styleList";
 import { useGalleryState } from "../../Hooks/useGalleryState";
 import { useNotesState } from "../../Hooks/useNotesState";
 import { useTodosState } from "../../Hooks/useTodosState";
-import SearchableList from "../SearchableList/SearchableList";
+import withSearchableList from "../withSearchableList/withSearchableList";
 
 const save = () => {}
 
@@ -22,22 +22,38 @@ const ListsFinal = () => {
         todos, editTodosMessage, editTodosNotes, editTodosDoneStage, editTodosIsDone, setTodosState, addTodosItem, deleteTodosItem
     } = useTodosState()
 
+    const Notes = withSearchableList(NotesItem);
+    const ToDos = withSearchableList(ToDosItem);
+    const Pictures = withSearchableList(PicturesItem);
+
     return (
         <>
         <div className={classes.button} onClick={save}>Save</div>
             <div className={classes.board}>
-                <SearchableList
+                <Notes
                     items={notes}
                     setItems={setNotes}
                 />
-                <SearchableList
+                {/* <SearchableList
+                    items={notes}
+                    setItems={setNotes}
+                /> */}
+                <ToDos
                     items={todos}
                     setItems={setTodosState}
                 />
-                <SearchableList
-                    items={galleryItems}
+                {/* <SearchableList
+                    items={todos}
+                    setItems={setTodosState}
+                /> */}
+                <Pictures
+                    item={galleryItems}
                     setItems={setGalleryState}
                 />
+                {/* <SearchableList
+                    items={galleryItems}
+                    setItems={setGalleryState}
+                /> */}
             </div>
         </>
     )
