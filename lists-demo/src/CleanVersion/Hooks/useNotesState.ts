@@ -12,7 +12,7 @@ export const useNotesState = () => {
         setNotes(data)
     }, [data])
     const editNote = (notes: string, index: number) => dispatch(editNotesMessageAction({data: notes, index}));
-    const addNote = (initialState: NoteData, index: number) => dispatch(addNotesItemAction({data: initialState, index}))
+    const addNote = (index: number) => dispatch(addNotesItemAction({data: getInitialNotesState(), index}))
     const deleteNote = (index: number) => dispatch(deleteNotesItemAction({index}))
     const setNotes = (newState: NoteData[]) => dispatch(setNotesStateAction(newState))
 
@@ -22,5 +22,6 @@ export const useNotesState = () => {
         addNote,
         deleteNote,
         setNotes,
+        initialNotesState: getInitialNotesState()
     }
 }

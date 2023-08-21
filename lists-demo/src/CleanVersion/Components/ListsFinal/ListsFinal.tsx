@@ -1,9 +1,14 @@
+import { link } from "fs";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { useGalleryState } from "../../Hooks/useGalleryState";
 import { useNotesState } from "../../Hooks/useNotesState";
 import { useTodosState } from "../../Hooks/useTodosState";
+import { tIsFoundFunction } from "../../Types/types";
 import withSearchableList from "../withSearchableList/withSearchableList";
+import NotesItem from "./NotesItem/NotesItem";
+import PicturesItem from "./PhotoListItem/PhotoListItem";
+import ToDosItem from "./ToDosItem/ToDosItem";
 
 const save = () => {}
 
@@ -25,6 +30,10 @@ const ListsFinal = () => {
     const Notes = withSearchableList(NotesItem);
     const ToDos = withSearchableList(ToDosItem);
     const Pictures = withSearchableList(PicturesItem);
+    const isFoundNotesFunction: tIsFoundFunction = (listItem: any, pattern: string) => {
+        const isFound = listItem.message.includes(pattern);
+        return isFound;
+    }
 
     return (
         <>
@@ -33,6 +42,10 @@ const ListsFinal = () => {
                 <Notes
                     items={notes}
                     setItems={setNotes}
+                    addItem={addNote}
+                    listTitle={'Notes'}
+                    isFoundFunction={isFoundNotesFunction}
+                    
                 />
                 {/* <SearchableList
                     items={notes}
@@ -40,15 +53,20 @@ const ListsFinal = () => {
                 /> */}
                 <ToDos
                     items={todos}
+                    addItem={addTodosItem}
+                    listTitle={'To do list'}
                     setItems={setTodosState}
+                    isFoundFunction={isFoundNotesFunction}
                 />
                 {/* <SearchableList
                     items={todos}
                     setItems={setTodosState}
                 /> */}
                 <Pictures
-                    item={galleryItems}
+                    items={galleryItems}
+                    listTitle={'Buy a picture'}
                     setItems={setGalleryState}
+                    isFoundFunction={isFoundNotesFunction}
                 />
                 {/* <SearchableList
                     items={galleryItems}

@@ -5,7 +5,7 @@ import RemoveShoppingChartIcon from "../../../../Icons/RemoveShoppingChartIcon";
 import { iPicturesData, ProgressType } from "../../../../Types/dataTypes";
 import DoneStage from "../DoneStage/DoneStage";
 
-const PhotoListItem = ({
+const PicturesItem = ({
     title,
     price,
     message,
@@ -49,4 +49,4 @@ const PhotoListItem = ({
     )
 }
 
-export default PhotoListItem
+export default PicturesItem

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import RemoveShoppingChartIcon from "../../../Icons/RemoveShoppingChartIcon";
-import { iPicturesData, OneOfListsData } from "../../Types/types";
+import { iPicturesData, OneOfListsData } from "../../../Types/dataTypes";
 import { useStyles } from "./styles";
 import { getBoughtItems, isPictureType } from "./utils";
 

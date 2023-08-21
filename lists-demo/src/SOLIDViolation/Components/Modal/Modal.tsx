@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import { iModal } from "../../Types/types";
+import { iModal } from "../../../Types/dataTypes";
 import { useStyles } from "./styles";
 
 const Modal = ({children, isOpen, setClose}: iModal) => {
