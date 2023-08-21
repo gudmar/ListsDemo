@@ -1,4 +1,4 @@
-import { iPicturesData, OneOfListsData } from "../../Types/types";
+import { iPicturesData, OneOfListsData } from "../../../Types/dataTypes";
 
 export const isPictureType = (items: OneOfListsData[]) => {
     const iPictureKeys = ['title', 'price', 'stockLevel']

@@ -9,9 +9,9 @@ type tDoWithItem = (index: number, item: any) => void;
 
 interface iListItem {
     items: any[],
-    addItem: tDoWithItem,
-    editItem: tDoWithItem,
-    deleteItem: (index: number) => void,
+    addItem?: tDoWithItem,
+    editItem?: tDoWithItem,
+    deleteItem?: (index: number) => void,
     setItems: (items: any[]) => void,
     isFoundFunction: tIsFoundFunction,
     listTitle: string,
@@ -63,7 +63,7 @@ const withSearchableList = (ListItem: FC<any>) => ({
 
         )
     }
-    return List
+    return List()
 }
 
 export default withSearchableList

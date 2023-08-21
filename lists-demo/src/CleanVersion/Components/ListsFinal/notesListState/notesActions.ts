@@ -1,5 +1,4 @@
-import { tPayload } from "../../../../SOLIDViolation/Types/types";
-import { NoteData } from "../../../../Types/dataTypes";
+import { NoteData, tPayload } from "../../../../Types/dataTypes";
 
 export const EDIT_NOTES_MESSAGE = 'edit notes message';
 export const SET_NOTES_STATE = 'set notes state';

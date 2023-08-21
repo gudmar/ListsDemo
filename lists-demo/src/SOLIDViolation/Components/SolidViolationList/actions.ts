@@ -1,4 +1,4 @@
-import { tPayload } from "../../Types/types";
+import { tPayload } from "../../../Types/dataTypes";
 
 export const EDIT_MESSAGE = 'edit message';
 export const EDIT_DONE_STAGE = 'edit done stage';

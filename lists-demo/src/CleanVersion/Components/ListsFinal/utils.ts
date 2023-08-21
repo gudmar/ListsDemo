@@ -1,5 +1,4 @@
-import { OneOfListsData, tPayload } from "../../../SOLIDViolation/Types/types";
-import { ToDoData } from "../../../Types/dataTypes";
+import { OneOfListsData, ToDoData, tPayload } from "../../../Types/dataTypes";
 
 interface iStatePropModifier {
     index: number,

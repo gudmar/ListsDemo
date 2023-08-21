@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { NOTES, PHOTOS, TO_DOS } from "../../Const/const"
-import { OneOfLists, OneOfListsData } from "../Types/types"
+import { OneOfLists, OneOfListsData } from "../../Types/dataTypes"
 
 export const useSave = () => {
     const [notes, setNotes] = useState([])

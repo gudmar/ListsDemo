@@ -1,6 +1,5 @@
 import { useReducer } from "react";
-import { ProgressType } from "../../../Types/dataTypes";
-import { OneOfListsData, tState } from "../../Types/types";
+import { OneOfListsData, ProgressType } from "../../../Types/dataTypes";
 import { deleteItemAction, editDoneStageAction, editIsDoneAction, editMessageAction, editNotesAction, setStateAction, addItemAction, toggleChartAction } from "./actions";
 import { getInitialState, reducer } from "./reducer";
 
