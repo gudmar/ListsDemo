@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
-import { iAddItem, iList, OneOfLists, OneOfListsData } from "../../Types/types";
 import { notesContent } from "../../../Data/notesContent";
 import { toDoContent } from "../../../Data/toDoContent";
 import { picturesContent } from "../../../Data/picturesContent";
 import { NOTES, PHOTOS, TO_DOS } from "../../../Const/const";
-import { AnyObject, ProgressType, ToDoData } from "../../../Types/dataTypes";
+import { AnyObject, iAddItem, iList, OneOfLists, OneOfListsData, ProgressType, ToDoData } from "../../../Types/dataTypes";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import ListItem from "./ListItem";

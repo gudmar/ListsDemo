@@ -6,6 +6,14 @@ const TITLE_MARGIN = '1rem';
 const TITLE_LOST = '4.5rem';
 
 export const useListStyles = createUseStyles({
+
+    notesListRight: {
+        position: 'absolute',
+        display: 'inline-block',
+        right: '0.15rem',
+        top: '0rem',
+    },
+    
     board: (theme: CustomTheme) => ({
         backgroundColor: theme.customBackground,
         height: '100vh',

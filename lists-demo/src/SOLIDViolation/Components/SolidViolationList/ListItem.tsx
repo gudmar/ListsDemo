@@ -1,9 +1,8 @@
 import { DONE_STAGE_MAX_POINTS, NOTES, TO_DOS } from "../../../Const/const";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
-import { iListItem, iNoteListItem, iToDosListItem, iDoneStage, iPicturesData } from "../../Types/types"
 import { CustomTheme } from '../../../Types/themes'
-import { PicturesData, ProgressType, ToDoData } from "../../../Types/dataTypes";
+import { iDoneStage, iListItem, iNoteListItem, iPicturesData, iToDosListItem, PicturesData, ProgressType, ToDoData } from "../../../Types/dataTypes";
 import DeleteIcon from "../../../Icons/DeleteIcon"; 
 import { useStyles } from "./styles";
 import RemoveShoppingChartIcon from "../../../Icons/RemoveShoppingChartIcon";
