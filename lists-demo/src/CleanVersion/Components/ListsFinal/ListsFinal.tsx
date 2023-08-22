@@ -1,4 +1,3 @@
-import { link } from "fs";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { useGalleryState } from "../../Hooks/useGalleryState";
@@ -6,9 +5,11 @@ import { useNotesState } from "../../Hooks/useNotesState";
 import { useTodosState } from "../../Hooks/useTodosState";
 import { tIsFoundFunction } from "../../Types/types";
 import withSearchableList from "../withSearchableList/withSearchableList";
+import NotesItemWithAddButton from "./NotesItem/NotesItem";
 import NotesItem from "./NotesItem/NotesItem";
 import PicturesItem from "./PhotoListItem/PhotoListItem";
-import ToDosItem from "./ToDosItem/ToDosItem";
+import ToDosItem, { ToDosItemWithAddButton } from "./ToDosItem/ToDosItem";
+import WithAddItem from "./WithAddItem/WithAddItem";
 
 const save = () => {}
 
@@ -27,8 +28,8 @@ const ListsFinal = () => {
         todos, editTodosMessage, editTodosNotes, editTodosDoneStage, editTodosIsDone, setTodosState, addTodosItem, deleteTodosItem
     } = useTodosState()
 
-    const Notes = withSearchableList(NotesItem);
-    const ToDos = withSearchableList(ToDosItem);
+    const Notes = withSearchableList(NotesItemWithAddButton);
+    const ToDos = withSearchableList(ToDosItemWithAddButton);
     const Pictures = withSearchableList(PicturesItem);
     const isFoundNotesFunction: tIsFoundFunction = (listItem: any, pattern: string) => {
         const isFound = listItem.message.includes(pattern);
@@ -43,9 +44,10 @@ const ListsFinal = () => {
                     items={notes}
                     setItems={setNotes}
                     addItem={addNote}
+                    editMessage={editNote}
+                    deleteItem={deleteNote}
                     listTitle={'Notes'}
                     isFoundFunction={isFoundNotesFunction}
-                    
                 />
                 {/* <SearchableList
                     items={notes}

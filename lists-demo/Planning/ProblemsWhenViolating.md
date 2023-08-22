@@ -42,6 +42,8 @@ After cleaning:
 * When defining type of the 'list' items. Should it be 'Any'? Otherwise when adding new type, means editing some type file, and probably a lot of other files
 * Types in TS: should considere changes here, as change to one type causes changes to lot of types
 * Break huge state into separate reducers
+* NotesItemWithAddButton is perfect example for OpenClosePrinciple,
+as this is NotesItem extended, not withSearchableList modified with switch conditions
 
 
 

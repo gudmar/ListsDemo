@@ -17,7 +17,7 @@ export const useTodosState = () => {
     const editTodosDoneStage = (index: number, newDoneStage: ProgressType) => dispatch(editDoneStageAction({data: newDoneStage, index}))
     const editTodosIsDone = (index: number, newIsDone: boolean) => dispatch(editTodosIsDoneAction({data: newIsDone, index}))
     const setTodosState = (newState: ToDoData[]) => dispatch(setTodosStateAction(newState))
-    const addTodosItem = (index: number, newTodosItem: ToDoData) => dispatch(addTodosItemAction({data: newTodosItem, index}))
+    const addTodosItem = (index: number) => dispatch(addTodosItemAction({data: getInitialTodosState(), index}))
     const deleteTodosItem = (index: number) => dispatch(deleteTodosItemAction({index}))
 
     return {
