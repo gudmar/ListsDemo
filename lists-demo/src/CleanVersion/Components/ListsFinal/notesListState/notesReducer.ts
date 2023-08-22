@@ -8,6 +8,7 @@ export const getInitialNotesState = ():NoteData[] => [({
 
 export const notesReducer = (state: NoteData[], { type, payload }: { type: string, payload: tPayload | NoteData[]} ): NoteData[] => {
     const {data, index }: {data?: any, index: number} = payload as tPayload;
+    console.log('Reducer clean', type, payload)
     switch(type) {
         case EDIT_NOTES_MESSAGE: {
             const resultState = getStateWithModifiedProp({index, data, state, propName: 'message'});

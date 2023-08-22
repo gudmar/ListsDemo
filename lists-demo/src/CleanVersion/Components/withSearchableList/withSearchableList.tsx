@@ -9,25 +9,20 @@ type tDoWithItem = (index: number, item: any) => void;
 
 interface iListItem {
     items: any[],
-    addItem?: tDoWithItem,
+    addItem?: (index: number) => void,
     editItem?: tDoWithItem,
     deleteItem?: (index: number) => void,
     setItems: (items: any[]) => void,
     isFoundFunction: tIsFoundFunction,
     listTitle: string,
-    [restProps: string]: any
-    
+    [restProps: string]: any   
 }
 
 const withSearchableList = (ListItem: FC<any>) => ({
     items,
-    // addItem,
-    // deleteItem,
-    setItems,
-    editItem,
     isFoundFunction,
     listTitle,
-    restProps,
+    ...rest
 }: iListItem) => {
     const List = () => {
         const { theme } = useThemesAPI();
@@ -35,32 +30,28 @@ const withSearchableList = (ListItem: FC<any>) => ({
         const {filteredList, SearchBox} = useSearchbox(items, isFoundFunction)
         // new Error('Implement this')
         return (
-            // <div className={`${classes.listWrapper} ${type===PHOTOS && classes.extraWidthForList}`}>
-            // {Modal} WIDTH should be controlled by item width
-        // Violation of DIP with this type prop
-        <div className={classes.pictureHeader}>
-            <div className={classes.listTitle}>{listTitle}</div>
-        {SearchBox}
-        <div className={classes.overflowAuto}>
-            {
-                // data.map((item, index) => {
-                filteredList.map((item: any, index: number) => {
-                    return (
-                        <>
-                        <ListItem
-                            data={item}
-                            id={index}
-                            key={JSON.stringify(item)}
-                            restProps={restProps}
-                            // Add item is part of this
-                        />
-                        </>
-                    )
-                })
-            }
+        <div className={`${classes.listWrapper}`}>
+            {/* // ${type===PHOTOS && classes.extraWidthForList}`}> */}
+            
+            <div className={classes.pictureHeader}>
+                <div className={classes.listTitle}>{listTitle}</div>
+            </div>
+                    {SearchBox}
+                    <div className={classes.overflowAuto}>
+                        {
+                            filteredList.map((item: any, index: number) => {
+                                return (
+                                    <ListItem
+                                        data={item}
+                                        id={index}
+                                        key={JSON.stringify(item)}
+                                        {...rest}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
         </div>
-    </div>
-
         )
     }
     return List()

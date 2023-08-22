@@ -30,11 +30,20 @@ export interface AnyObject {
 export interface iNoteListItem {
     data: NoteData,
     editMessage: tEditNote,
-    id: number | string,
+    id: number,
+    deleteItem?: (id:number) => void,
+}
+
+export interface iNoteListItemViolation {
+    data: NoteData,
+    editMessage: tEditNoteViolation,
+    id: number,
     deleteItem?: () => void,
 }
 
-export type tEditNote = (newValue: string) => void;
+export type tEditNoteViolation = (newValue: string) => void;
+
+export type tEditNote = (newValue: string, index: number) => void;
 
 export type OneOfLists = "Notes" | "ToDoList" | "Photos"
 
@@ -56,7 +65,7 @@ export interface iAddItem {
 export interface iListItem {
     type: OneOfLists,
     data: OneOfListsData,
-    id: number | string,
+    id: number,
     setIsDone?: tSetIsDoneState,
     setDoneStage?: tSetDoneStage,
     editNote?: tEditNote,
@@ -65,11 +74,24 @@ export interface iListItem {
     toggleChart?: () =>  void
 }
 
+export interface iListItemViolation {
+    type: OneOfLists,
+    data: OneOfListsData,
+    id: number,
+    setIsDone?: tSetIsDoneState,
+    setDoneStage?: tSetDoneStage,
+    editNote?: tEditNoteViolation,
+    editMessage?: tEditNoteViolation,
+    deleteItem?: () => void,
+    toggleChart?: () =>  void
+}
+
+
 export interface iNoteListItem {
     data: NoteData,
     editMessage: tEditNote,
-    id: number | string,
-    deleteItem?: () => void,
+    id: number,
+    deleteItem?: (id: number) => void,
     addItem?: (index: number) => void,
 }
 
@@ -86,12 +108,30 @@ export interface iToDosListItem {
     doneStage: ProgressType,
     isDone: boolean,
     notes?: string,
-    id: number | string,
+    id: number,
     setDoneStage?: tSetDoneStage,
     setIsDone?: tSetIsDoneState,
     editMessage?: tEditNote,
     editNote?: tEditNote,
     deleteItem?: () => void,
+}
+
+export interface iToDosListItemViolation {
+    message: string,
+    doneStage: ProgressType,
+    isDone: boolean,
+    notes?: string,
+    id: number,
+    setDoneStage?: tSetDoneStage,
+    setIsDone?: tSetIsDoneState,
+    editMessage?: tEditNoteViolation,
+    editNote?: tEditNoteViolation,
+    deleteItem?: () => void,
+}
+
+
+export interface iToDosWithAddButton extends iToDosListItem {
+    addItem: (index: number) => void
 }
 
 export interface iPicturesData {

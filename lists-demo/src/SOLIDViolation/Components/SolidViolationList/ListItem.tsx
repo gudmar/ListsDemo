@@ -2,13 +2,13 @@ import { DONE_STAGE_MAX_POINTS, NOTES, TO_DOS } from "../../../Const/const";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import { CustomTheme } from '../../../Types/themes'
-import { iDoneStage, iListItem, iNoteListItem, iPicturesData, iToDosListItem, PicturesData, ProgressType, ToDoData } from "../../../Types/dataTypes";
+import { iDoneStage, iListItem, iListItemViolation, iNoteListItemViolation, iPicturesData, iToDosListItem, iToDosListItemViolation, PicturesData, ProgressType, ToDoData } from "../../../Types/dataTypes";
 import DeleteIcon from "../../../Icons/DeleteIcon"; 
 import { useStyles } from "./styles";
 import RemoveShoppingChartIcon from "../../../Icons/RemoveShoppingChartIcon";
 import AddShoppingChartIcon from "../../../Icons/AddShoppingChartIcon";
 
-const NoteListItem = ({data, editMessage, deleteItem}: iNoteListItem) => {
+const NoteListItem = ({data, editMessage, deleteItem}: iNoteListItemViolation) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
     const localClasses = useStyles();
@@ -51,7 +51,7 @@ const ToDosListItem = ({
     editMessage,
     editNote,
     deleteItem,
-}: iToDosListItem) => {
+}: iToDosListItemViolation) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
     const localClasses = useStyles();
@@ -125,7 +125,7 @@ const PhotoListItem = ({
 
 const ListItem = ({
     type, data, id, setIsDone, setDoneStage, editMessage, editNote, deleteItem, toggleChart,
-}: iListItem) => {
+}: iListItemViolation) => {
     if (type === TO_DOS) {
         return (
             <ToDosListItem

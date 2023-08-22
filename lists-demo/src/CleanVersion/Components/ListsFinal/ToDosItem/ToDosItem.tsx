@@ -1,8 +1,9 @@
 import { useThemesAPI } from "../../../../Context/useThemeAPI";
 import { useListStyles } from "../../../../GlobalStyling/styleList";
 import DeleteIcon from "../../../../Icons/DeleteIcon";
-import { iToDosListItem, ProgressType } from "../../../../Types/dataTypes";
+import { iToDosListItem, iToDosWithAddButton, ProgressType } from "../../../../Types/dataTypes";
 import DoneStage from "../DoneStage/DoneStage";
+import WithAddItem from "../WithAddItem/WithAddItem";
 
 const ToDosItem = ({
     message,
@@ -30,9 +31,9 @@ const ToDosItem = ({
             <div className={classes.horizontal}>
                 <input className={classes.pointer} type="checkbox" checked={isDone} id={`${id}`} onChange={() => { setIsDone!(!isDone)}}/>
                 <div>
-                    <label className={`${classes.message} ${classes.checkboxLabel}`} spellCheck={false}  contentEditable onBlur={(e: any) => {editMessage!(e.target.outerText)}}>{message}</label>
+                    <label className={`${classes.message} ${classes.checkboxLabel}`} spellCheck={false}  contentEditable onBlur={(e: any) => {editMessage!(e.target.outerText, id)}}>{message}</label>
                     <hr/>
-                    <div className={classes.note} spellCheck={false} contentEditable onBlur={(e: any) => {editNote!(e.target.outerText)}}>{notes}</div>
+                    <div className={classes.note} spellCheck={false} contentEditable onBlur={(e: any) => {editNote!(e.target.outerText, id)}}>{notes}</div>
                     <DoneStage level={doneStage} setDoneStage={onDoneStageChange}/>
                 </div>
                 
@@ -41,4 +42,40 @@ const ToDosItem = ({
     )
 }
 
-export default ToDosItem
+export const ToDosItemWithAddButton = ({
+    addItem,
+    message,
+    doneStage,
+    isDone,
+    notes,
+    id,
+    setIsDone,
+    setDoneStage,
+    editMessage,
+    editNote,
+    deleteItem,
+}: iToDosWithAddButton) => {
+    return (
+        <WithAddItem
+            addItem={addItem}
+            id={parseInt(`${id}`)}
+        >
+            <ToDosItem
+                message={message}
+                doneStage={doneStage}
+                isDone={isDone}
+                notes={notes}
+                id={id}
+                setIsDone={setIsDone}
+                setDoneStage={setDoneStage}
+                editMessage={editMessage}
+                editNote={editNote}
+                deleteItem={deleteItem}
+                key={JSON.stringify(`${message}${notes}`)}
+            />
+        </WithAddItem>
+    )
+
+}
+
+export default ToDosItemWithAddButton
