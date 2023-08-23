@@ -130,8 +130,30 @@ export interface iToDosListItemViolation {
 }
 
 
+type tToDosDataType = {
+    message: string,
+    doneStage: 0,
+    isDone: boolean,
+    notes: string,
+}
+
 export interface iToDosWithAddButton extends iToDosListItem {
-    addItem: (index: number) => void
+    addItem: (index: number) => void,
+    data: tToDosDataType,
+}
+
+type tPicturesItemData = {
+    title: string,
+    stockLevel: ProgressType,
+    imageName: string,
+    message: string,
+    price: number,
+}
+
+export interface iPicturesDataFinal {
+    data: tPicturesItemData,
+    isInChart: boolean,
+    toggleChart: () => void,
 }
 
 export interface iPicturesData {

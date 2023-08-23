@@ -1,7 +1,7 @@
 * + Add new note does not work
 * + Edit note does not work
 * + Delete note not work
-* - NO message or notes in toDos
+* + NO message or notes in toDos
 * - Add new To do does not work
 * - Edit to do does not work
 * - Delete to dos not work

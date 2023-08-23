@@ -44,6 +44,7 @@ const ToDosItem = ({
 
 export const ToDosItemWithAddButton = ({
     addItem,
+    data,
     message,
     doneStage,
     isDone,
@@ -55,23 +56,24 @@ export const ToDosItemWithAddButton = ({
     editNote,
     deleteItem,
 }: iToDosWithAddButton) => {
+    console.log(data)
     return (
         <WithAddItem
             addItem={addItem}
             id={parseInt(`${id}`)}
         >
             <ToDosItem
-                message={message}
-                doneStage={doneStage}
-                isDone={isDone}
-                notes={notes}
+                message={data.message}
+                doneStage={data.doneStage}
+                isDone={data.isDone}
+                notes={data.notes}
                 id={id}
                 setIsDone={setIsDone}
                 setDoneStage={setDoneStage}
                 editMessage={editMessage}
                 editNote={editNote}
                 deleteItem={deleteItem}
-                key={JSON.stringify(`${message}${notes}`)}
+                key={JSON.stringify(`${data.message}${data.notes}`)}
             />
         </WithAddItem>
     )
