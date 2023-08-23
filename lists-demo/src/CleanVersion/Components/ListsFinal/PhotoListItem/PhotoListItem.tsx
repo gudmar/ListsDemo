@@ -13,17 +13,19 @@ const PicturesItem = ({
     // stockLevel,
     // imageName,
     isInChart,
+    id,
     toggleChart,
 }: iPicturesDataFinal) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
+    console.log(data)
     return (
         <div className={classes.listItem}>
             <div className={classes.pictureHeader}>
                 <div className={classes.pictureTitle}>{data.title}</div>
-                <div className={classes.shoppingChartItem} onClick={() => { toggleChart(); console.log('Togging') }}>
+                <div className={classes.shoppingChartItem} onClick={() => { toggleChart(id); console.log('Togging') }}>
                     <div className={`${classes.center} ${classes.marginRight}`}>
-                        {isInChart ? 
+                        {data.isInChart ? 
                             <RemoveShoppingChartIcon
                                 className={classes.cursorPointer}
                             />: 

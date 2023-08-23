@@ -14,6 +14,7 @@ export const getInitialGalleryState = ():PicturesData[] => [({
 export const galleryReducer = (state: PicturesData[], { type, payload }: { type: string, payload: tPayload | PicturesData[]} ): PicturesData[] => {
     const { index }: { index: number} = payload as tPayload;
     // IS this not a violation of Liskov subtype principle? data is omited
+    console.log('Gallery', type, payload)
     switch(type) {
         case SET_GALLERY_STATE: {
             state = payload as PicturesData[]
