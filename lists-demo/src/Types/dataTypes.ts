@@ -157,18 +157,28 @@ export interface iToDosWithAddButton extends iToDosListItemFinal {
     data: tToDosDataType,
 }
 
-type tPicturesItemData = {
+// type tPicturesItemData = {
+//     title: string,
+//     stockLevel: ProgressType,
+//     imageName: string,
+//     message: string,
+//     price: number,
+// }
+
+type tPicturesItemDataFinal = {
     title: string,
     stockLevel: ProgressType,
     imageName: string,
     message: string,
     price: number,
+    isInChart: boolean,
 }
 
 export interface iPicturesDataFinal {
-    data: tPicturesItemData,
+    data: tPicturesItemDataFinal,
     isInChart: boolean,
-    toggleChart: () => void,
+    toggleChart: (id: number) => void,
+    id: number,
 }
 
 export interface iPicturesData {

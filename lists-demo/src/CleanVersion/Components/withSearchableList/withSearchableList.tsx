@@ -32,7 +32,7 @@ const withSearchableList = (ListItem: FC<any>) => ({
         return (
         <div className={`${classes.listWrapper}`}>
             {/* // ${type===PHOTOS && classes.extraWidthForList}`}> */}
-            
+            <button onClick={() => console.log(items) }>STATE</button>
             <div className={classes.pictureHeader}>
                 <div className={classes.listTitle}>{listTitle}</div>
             </div>

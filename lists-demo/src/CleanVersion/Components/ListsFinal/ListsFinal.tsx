@@ -35,7 +35,7 @@ console.log(todos)
         const isFound = listItem.message.includes(pattern);
         return isFound;
     }
-
+    console.log(galleryItems)
     return (
         <>
         <div className={classes.button} onClick={save}>Save</div>
@@ -75,7 +75,7 @@ console.log(todos)
                     listTitle={'Buy a picture'}
                     setItems={setGalleryState}
                     isFoundFunction={isFoundNotesFunction}
-
+                    toggleChart={toggleGalleryIsInChart}
                 />
                 {/* <SearchableList
                     items={galleryItems}
