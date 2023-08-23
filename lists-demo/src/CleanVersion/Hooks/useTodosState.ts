@@ -1,8 +1,7 @@
 import { useEffect, useReducer } from "react"
 import { LOCAL_STORAGE_TODOS } from "../../Const/const";
-import { editDoneStageAction } from "../../SOLIDViolation/Components/SolidViolationList/actions";
 import { ProgressType, ToDoData } from "../../Types/dataTypes";
-import { addTodosItemAction, deleteTodosItemAction, editTodosIsDoneAction, editTodosMessageAction, editTodosNotesAction, setTodosStateAction } from "../Components/ListsFinal/toDosState/toDosActions";
+import { addTodosItemAction, deleteTodosItemAction, editTodosDoneStageAction, editTodosIsDoneAction, editTodosMessageAction, editTodosNotesAction, setTodosStateAction } from "../Components/ListsFinal/toDosState/toDosActions";
 import { getInitialTodosState, todosReducer } from "../Components/ListsFinal/toDosState/toDosReducer"
 import { useLoadData } from "./useLoadData";
 
@@ -12,10 +11,10 @@ export const useTodosState = () => {
     useEffect(() => {
         setTodosState(data)
     }, [data])
-    const editTodosMessage = (index: number, newMessage: string) => dispatch(editTodosMessageAction({data: newMessage, index}))
-    const editTodosNotes = (index: number, newNote: string) => dispatch(editTodosNotesAction({data: newNote, index}))
-    const editTodosDoneStage = (index: number, newDoneStage: ProgressType) => dispatch(editDoneStageAction({data: newDoneStage, index}))
-    const editTodosIsDone = (index: number, newIsDone: boolean) => dispatch(editTodosIsDoneAction({data: newIsDone, index}))
+    const editTodosMessage = (newMessage: string, index: number) => dispatch(editTodosMessageAction({data: newMessage, index}))
+    const editTodosNotes = (newNote: string, index: number) => dispatch(editTodosNotesAction({data: newNote, index}))
+    const editTodosDoneStage = (newDoneStage: ProgressType, index: number) => dispatch(editTodosDoneStageAction({data: newDoneStage, index}))
+    const editTodosIsDone = (newIsDone: boolean, index: number) => dispatch(editTodosIsDoneAction({data: newIsDone, index}))
     const setTodosState = (newState: ToDoData[]) => dispatch(setTodosStateAction(newState))
     const addTodosItem = (index: number) => dispatch(addTodosItemAction({data: getInitialTodosState(), index}))
     const deleteTodosItem = (index: number) => dispatch(deleteTodosItemAction({index}))

@@ -1,7 +1,7 @@
 import { useThemesAPI } from "../../../../Context/useThemeAPI";
 import { useListStyles } from "../../../../GlobalStyling/styleList";
 import DeleteIcon from "../../../../Icons/DeleteIcon";
-import { iToDosListItem, iToDosWithAddButton, ProgressType } from "../../../../Types/dataTypes";
+import { iToDosListItem, iToDosListItemFinal, iToDosWithAddButton, ProgressType } from "../../../../Types/dataTypes";
 import DoneStage from "../DoneStage/DoneStage";
 import WithAddItem from "../WithAddItem/WithAddItem";
 
@@ -16,25 +16,22 @@ const ToDosItem = ({
     editMessage,
     editNote,
     deleteItem,
-}: iToDosListItem) => {
+}: iToDosListItemFinal) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);
-    const onDoneStageChange = (val: ProgressType) => {
-        setDoneStage!(val);
-    }
     return (
         <div className={classes.listItem}>
             <DeleteIcon
                 className={`${classes.notesListRight} ${classes.pointer}`}
-                onClick={deleteItem}
+                onClick={() => deleteItem(id)}
             />
             <div className={classes.horizontal}>
-                <input className={classes.pointer} type="checkbox" checked={isDone} id={`${id}`} onChange={() => { setIsDone!(!isDone)}}/>
+                <input className={classes.pointer} type="checkbox" checked={isDone} id={`${id}`} onChange={() => { setIsDone!(!isDone, id)}}/>
                 <div>
                     <label className={`${classes.message} ${classes.checkboxLabel}`} spellCheck={false}  contentEditable onBlur={(e: any) => {editMessage!(e.target.outerText, id)}}>{message}</label>
                     <hr/>
                     <div className={classes.note} spellCheck={false} contentEditable onBlur={(e: any) => {editNote!(e.target.outerText, id)}}>{notes}</div>
-                    <DoneStage level={doneStage} setDoneStage={onDoneStageChange}/>
+                    <DoneStage level={doneStage} setDoneStage={(val) => setDoneStage(val, id)}/>
                 </div>
                 
             </div>
@@ -56,7 +53,6 @@ export const ToDosItemWithAddButton = ({
     editNote,
     deleteItem,
 }: iToDosWithAddButton) => {
-    console.log(data)
     return (
         <WithAddItem
             addItem={addItem}
