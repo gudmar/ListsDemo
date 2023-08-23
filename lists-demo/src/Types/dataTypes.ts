@@ -48,7 +48,9 @@ export type tEditNote = (newValue: string, index: number) => void;
 export type OneOfLists = "Notes" | "ToDoList" | "Photos"
 
 export type tSetDoneStage = (val: ProgressType) => void;
+export type tSetDoneStageFinal = (val: ProgressType, id: number) => void;
 export type tSetIsDoneState = (val:boolean) => void;
+export type tSetIsDoneStateFinal = (val: boolean, id: number) => void
 
 export type tChildren = ReactChild | ReactChild[]
 
@@ -116,6 +118,19 @@ export interface iToDosListItem {
     deleteItem?: () => void,
 }
 
+export interface iToDosListItemFinal {
+    message: string,
+    doneStage: ProgressType,
+    isDone: boolean,
+    notes?: string,
+    id: number,
+    setDoneStage: tSetDoneStageFinal,
+    setIsDone: tSetIsDoneStateFinal,
+    editMessage: tEditNote,
+    editNote: tEditNote,
+    deleteItem: (index: number) => void,
+}
+
 export interface iToDosListItemViolation {
     message: string,
     doneStage: ProgressType,
@@ -137,7 +152,7 @@ type tToDosDataType = {
     notes: string,
 }
 
-export interface iToDosWithAddButton extends iToDosListItem {
+export interface iToDosWithAddButton extends iToDosListItemFinal {
     addItem: (index: number) => void,
     data: tToDosDataType,
 }

@@ -60,6 +60,11 @@ console.log(todos)
                     listTitle={'To do list'}
                     setItems={setTodosState}
                     isFoundFunction={isFoundNotesFunction}
+                    editNote={editTodosNotes}
+                    editMessage={editTodosMessage}
+                    setDoneStage={editTodosDoneStage}
+                    deleteItem={deleteTodosItem}
+                    setIsDone={editTodosIsDone}
                 />
                 {/* <SearchableList
                     items={todos}
@@ -70,6 +75,7 @@ console.log(todos)
                     listTitle={'Buy a picture'}
                     setItems={setGalleryState}
                     isFoundFunction={isFoundNotesFunction}
+
                 />
                 {/* <SearchableList
                     items={galleryItems}
