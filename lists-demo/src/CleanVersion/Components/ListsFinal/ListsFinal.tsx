@@ -27,7 +27,7 @@ const ListsFinal = () => {
     const {
         todos, editTodosMessage, editTodosNotes, editTodosDoneStage, editTodosIsDone, setTodosState, addTodosItem, deleteTodosItem
     } = useTodosState()
-
+console.log(todos)
     const Notes = withSearchableList(NotesItemWithAddButton);
     const ToDos = withSearchableList(ToDosItemWithAddButton);
     const Pictures = withSearchableList(PicturesItem);
@@ -55,6 +55,7 @@ const ListsFinal = () => {
                 /> */}
                 <ToDos
                     items={todos}
+                    message={todos}
                     addItem={addTodosItem}
                     listTitle={'To do list'}
                     setItems={setTodosState}
