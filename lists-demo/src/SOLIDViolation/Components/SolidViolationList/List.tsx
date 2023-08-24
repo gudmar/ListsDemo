@@ -161,7 +161,7 @@ const List = ({
                                     index={index}
                                     addItem={
                                         (index: number)=> {
-                                            addItem(data, index)
+                                            addItem(data, index + 1)
                                         }
                                     }
                                 / >

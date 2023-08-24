@@ -20,7 +20,7 @@ export const notesReducer = (state: NoteData[], { type, payload }: { type: strin
         }
         case ADD_NOTES_ITEM: {
             const newState = [...state];
-            newState.splice(index + 1, 0, data);
+            newState.splice(index, 0, data);
             return newState;
         }
         case DELETE_NOTES_ITEM: {

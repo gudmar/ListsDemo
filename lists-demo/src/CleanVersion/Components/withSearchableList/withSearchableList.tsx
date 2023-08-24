@@ -18,7 +18,7 @@ interface iListItem {
     [restProps: string]: any   
 }
 
-const withSearchableList = (ListItem: FC<any>) => ({
+const withSearchableList = (ListItem: FC<any>, HeaderIcon: FC<any>, headerIconAction: () => void) => ({
     items,
     isFoundFunction,
     listTitle,
@@ -35,6 +35,7 @@ const withSearchableList = (ListItem: FC<any>) => ({
             <button onClick={() => console.log(items) }>STATE</button>
             <div className={classes.pictureHeader}>
                 <div className={classes.listTitle}>{listTitle}</div>
+                <HeaderIcon className={`${classes.cursorPointer}`} onClick={headerIconAction}/>
             </div>
                     {SearchBox}
                     <div className={classes.overflowAuto}>

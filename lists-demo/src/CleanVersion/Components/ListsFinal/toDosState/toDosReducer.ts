@@ -40,7 +40,7 @@ export const todosReducer = (state: ToDoData[], { type, payload }: { type: strin
         }
         case ADD_TODOS_ITEM: {
             const newState = [...state];
-            newState.splice(index + 1, 0, data);
+            newState.splice(index, 0, data);
             return newState;
         }
         case DELETE_TODOS_ITEM: {
