@@ -14,4 +14,3 @@
 * - Save not work
 * + Adding item adds item at not proper index in both: violation and not violation
 * - When item is added / deleted to the list, whole list rerenders and scroll bar is rewinded to the begining
-* - All items in chart are added by default
