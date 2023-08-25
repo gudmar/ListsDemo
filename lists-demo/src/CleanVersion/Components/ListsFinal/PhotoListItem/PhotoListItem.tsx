@@ -1,9 +1,16 @@
+import { memo } from "react";
 import { useThemesAPI } from "../../../../Context/useThemeAPI";
 import { useListStyles } from "../../../../GlobalStyling/styleList";
 import AddShoppingChartIcon from "../../../../Icons/AddShoppingChartIcon";
 import RemoveShoppingChartIcon from "../../../../Icons/RemoveShoppingChartIcon";
 import { iPicturesData, iPicturesDataFinal, ProgressType } from "../../../../Types/dataTypes";
 import DoneStage from "../DoneStage/DoneStage";
+
+const Image = memo(({src}: {src: string}) => {
+    return (
+        <img src={src} alt='sold graphic representation'/>
+    )
+});
 
 const PicturesItem = ({
     data,
@@ -45,7 +52,8 @@ const PicturesItem = ({
                 <DoneStage level={data.stockLevel} setDoneStage={(val:ProgressType)=>{}}/>
             </div>
             <div className={classes.center}>
-                <img src={`./${data.imageName}`} alt='sold graphic representation'/>
+                {/* <img src={`./${data.imageName}`} alt='sold graphic representation'/> */}
+                <Image src={`./${data.imageName}`} />
             </div>
             
         </div>

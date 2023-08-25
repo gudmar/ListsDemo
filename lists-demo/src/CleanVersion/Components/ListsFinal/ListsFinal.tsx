@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import AddIcon from "../../../Icons/Add";
@@ -35,9 +36,19 @@ const ListsFinal = () => {
 
     const {modal: Modal, open: openModal} = useModal(<ChartContent items={galleryItems}/>)
     const showShoppingChart = () => openModal();
-    const Notes = withSearchableList(NotesItemWithAddButton, AddIcon, () => addNote(0));
-    const ToDos = withSearchableList(ToDosItemWithAddButton, AddIcon, () => addTodosItem(0));
-    const Pictures = withSearchableList(PicturesItem, ShoppingChartIcon, showShoppingChart);
+    const Notes = useMemo(
+       () => {
+            return withSearchableList(NotesItemWithAddButton, AddIcon, () => addNote(0))
+       }, 
+    []);
+    const ToDos = useMemo(
+        () => withSearchableList(ToDosItemWithAddButton, AddIcon, () => addTodosItem(0)),
+        []
+    );
+    const Pictures = useMemo(
+        () => withSearchableList(PicturesItem, ShoppingChartIcon, showShoppingChart),
+        []
+    );
     const isFoundNotesFunction: tIsFoundFunction = (listItem: any, pattern: string) => {
         const isFound = listItem.message.includes(pattern);
         return isFound;
