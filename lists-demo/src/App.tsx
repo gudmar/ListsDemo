@@ -74,7 +74,7 @@ const versions = [
 function App() {
   const [version, setVersion] = useState(SOLID_VIOLATION)
   const ComponentVersion = withVersion(version)
-  // return (<>{version}</>);
+  
   return <>
     <SelectVersion
       setValue={setVersion}

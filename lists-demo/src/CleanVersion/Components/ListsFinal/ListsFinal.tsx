@@ -3,6 +3,8 @@ import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
 import AddIcon from "../../../Icons/Add";
 import ShoppingChartIcon from "../../../Icons/ShoppingChartIcon";
+import { saveNotes } from "../../Functions/saveNotes";
+import { saveToDos } from "../../Functions/saveToDos";
 import { useGalleryState } from "../../Hooks/useGalleryState";
 import { useModal } from "../../Hooks/useModal";
 import { useNotesState } from "../../Hooks/useNotesState";
@@ -11,12 +13,8 @@ import { tIsFoundFunction } from "../../Types/types";
 import ChartContent from "../ChartContent/ChartContent";
 import withSearchableList from "../withSearchableList/withSearchableList";
 import NotesItemWithAddButton from "./NotesItem/NotesItem";
-import NotesItem from "./NotesItem/NotesItem";
 import PicturesItem from "./PhotoListItem/PhotoListItem";
-import ToDosItem, { ToDosItemWithAddButton } from "./ToDosItem/ToDosItem";
-import WithAddItem from "./WithAddItem/WithAddItem";
-
-const save = () => {}
+import { ToDosItemWithAddButton } from "./ToDosItem/ToDosItem";
 
 const ListsFinal = () => {
     const { theme } = useThemesAPI();
@@ -33,6 +31,10 @@ const ListsFinal = () => {
         todos, editTodosMessage, editTodosNotes, editTodosDoneStage, editTodosIsDone, setTodosState, addTodosItem, deleteTodosItem
     } = useTodosState()
     
+    const save = async () => {
+        await saveNotes(notes);
+        await saveToDos(todos);
+    }    
 
     const {modal: Modal, open: openModal} = useModal(<ChartContent items={galleryItems}/>)
     const showShoppingChart = () => openModal();
@@ -54,7 +56,6 @@ const ListsFinal = () => {
         return isFound;
     }
     
-    console.log(galleryItems)
     return (
         <>
         <div className={classes.button} onClick={save}>Save</div>
@@ -69,10 +70,6 @@ const ListsFinal = () => {
                     listTitle={'Notes'}
                     isFoundFunction={isFoundNotesFunction}
                 />
-                {/* <SearchableList
-                    items={notes}
-                    setItems={setNotes}
-                /> */}
                 <ToDos
                     items={todos}
                     message={todos}
@@ -86,10 +83,6 @@ const ListsFinal = () => {
                     deleteItem={deleteTodosItem}
                     setIsDone={editTodosIsDone}
                 />
-                {/* <SearchableList
-                    items={todos}
-                    setItems={setTodosState}
-                /> */}
                 <Pictures
                     items={galleryItems}
                     listTitle={'Buy a picture'}
@@ -97,10 +90,6 @@ const ListsFinal = () => {
                     isFoundFunction={isFoundNotesFunction}
                     toggleChart={toggleGalleryIsInChart}
                 />
-                {/* <SearchableList
-                    items={galleryItems}
-                    setItems={setGalleryState}
-                /> */}
             </div>
         </>
     )

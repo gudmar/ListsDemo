@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useImperativeHandle, ReactNode } from "react";
+import { forwardRef, useState, useRef, useImperativeHandle} from "react";
 import { useSearchStyles } from "./styles";
 import SearchIcon from '../../../Icons/SearchIcon'
 
@@ -8,17 +8,14 @@ const SearchBox = forwardRef( ({
     placeholder,
     onPatternChange
 }: any, ref) => {
-    // const inputRef = useRef(null);
     const classes = useSearchStyles();
     const [value, setValue] = useState(INITIAL_VALUE)
     const [isEditMode, setIsEditMode] = useState(false);
     const inputBox = useRef(null);
-    // const [subscribtionFunction, setSubscribtionFunction] = useState((()=>(val:string)=>{}))
     useImperativeHandle(ref, () => {
         return {
             reset() {setValue(INITIAL_VALUE)},
             getPattern() {return value},
-            // subscribe(callback: (val: string) => void) {setSubscribtionFunction(callback)}
         }
     })
     return(
@@ -42,11 +39,9 @@ const SearchBox = forwardRef( ({
                     onFocus={() => setIsEditMode(true)}
                     onBlur={() => {if (value === '') setIsEditMode(false)}}
                     onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        console.log(event)
                         onPatternChange(event.target.innerText);
                         setValue(event.target.innerText)
                     }}
-                    // ref={inputRef}
                 ></div>
             </div>
         </div>

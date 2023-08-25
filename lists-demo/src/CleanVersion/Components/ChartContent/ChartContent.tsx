@@ -10,7 +10,6 @@ const removeBoughtItem = (items: OneOfListsData[], index: number, setItemsFuncti
     const previousBoughtItems = getBoughtItems(items as iPicturesData[]);
     (previousBoughtItems as iPicturesData[])[index].isInChart = false;
     const boughtItems = [...getBoughtItems(items as iPicturesData[])]
-    console.log(index, boughtItems, items)
     setItemsFunction(boughtItems as iPicturesData[]);
 }
 

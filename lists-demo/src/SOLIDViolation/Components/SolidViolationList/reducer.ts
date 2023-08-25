@@ -1,4 +1,4 @@
-import { AnyObject, OneOfListsData, PicturesData, ToDoData, tPayload } from '../../../Types/dataTypes';
+import { OneOfListsData, PicturesData, ToDoData, tPayload } from '../../../Types/dataTypes';
 import { ADD_ITEM, DELETE_ITEM, EDIT_DONE_STAGE, EDIT_IS_DONE, EDIT_MESSAGE, EDIT_NOTES, SET_STATE, TOGGLE_CHART } from './actions'
 
 export const getInitialState = ():OneOfListsData[] => [({
@@ -31,34 +31,14 @@ interface iStatePropModifier {
     data: any
 }
 
-interface iStateMultiPropModifier {
-    index: number,
-    propNames: string[],
-    state: OneOfListsData[],
-    data: AnyObject,
-}
-
-
 const getStateWithModifiedProp = ({index, propName, state, data}: iStatePropModifier) => {
     const modifiedObject: OneOfListsData = state[index];
     state[index] = {...modifiedObject, [propName]: data}
     return [...state]; // returning not a new object, but the object that will be passed to listItem is new
 }
 
-const getStateWithModifiedMultiProps = ({index, propNames, state, data}: iStateMultiPropModifier) => {
-    const objectToModify: OneOfListsData = state[index];
-    const modifiedObject = propNames.reduce((readyObject: AnyObject, propName: string) => {
-        readyObject[propName] = data[propName];
-        return readyObject
-    }, objectToModify);
-    state[index] = modifiedObject as OneOfListsData;
-    return [...state];
-}
-
 export const reducer = (state: OneOfListsData[], { type, payload }: { type: string, payload: tPayload} ): OneOfListsData[] => {
     const {data, index }: {data?: any, index: number} = payload;
-    // console.log('%cSetting reducer', 'background-color: green; color: white; font-weight: bold; padding: 5px; border-radius: 4px')
-    // console.log(type, payload)
     switch(type) {
         case EDIT_MESSAGE: {
             const resultState = getStateWithModifiedProp({index, data, state, propName: 'message'});

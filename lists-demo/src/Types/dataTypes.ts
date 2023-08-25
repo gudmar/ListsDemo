@@ -157,14 +157,6 @@ export interface iToDosWithAddButton extends iToDosListItemFinal {
     data: tToDosDataType,
 }
 
-// type tPicturesItemData = {
-//     title: string,
-//     stockLevel: ProgressType,
-//     imageName: string,
-//     message: string,
-//     price: number,
-// }
-
 type tPicturesItemDataFinal = {
     title: string,
     stockLevel: ProgressType,
@@ -204,11 +196,6 @@ export type tState = {
     doneStage: ProgressType,
     isDone: boolean,
     notes: string,
-    // title: string,
-    // price: number,
-    // stockLevel: ProgressType,
-    // imageName: string,
-    // User may not manipulate stockLevel or imageNames, that is why this should not be in state
 }
 
 export type tPayload = {

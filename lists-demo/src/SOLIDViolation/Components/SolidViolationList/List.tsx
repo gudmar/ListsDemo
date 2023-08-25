@@ -11,7 +11,6 @@ import { useListsState } from "./useListsState";
 import SearchBox from "../Search/SearchBox";
 import { useSearch } from "../Search/useSearch";
 import ShoppingChartIcon from "../../../Icons/ShoppingChartIcon";
-import Modal from "../Modal/Modal";
 import { useModal } from "../../hooks/useModal";
 import ChartContent from "../ChartContent/ChartContent";
 import AddIcon from "../../../Icons/Add";
@@ -48,7 +47,6 @@ const AddItem = ({
 
 const useDoWithStateHandler = (doWithStateFunction: (nextState:any) => void, state: any) => {
     useEffect(() => {
-        console.log(doWithStateFunction)
         doWithStateFunction(state);
     }, [state ,doWithStateFunction])
 }
@@ -137,7 +135,6 @@ const List = ({
             />
             <div className={classes.overflowAuto}>
                 {
-                    // data.map((item, index) => {
                     filteredList.map((item: any, index: number) => {
                         return (
                             <>

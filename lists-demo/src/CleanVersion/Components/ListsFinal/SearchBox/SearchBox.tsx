@@ -34,7 +34,6 @@ const SearchBox =({
                     onFocus={() => setIsEditMode(true)}
                     onBlur={() => {if (value === '') setIsEditMode(false)}}
                     onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        console.log(event)
                         onPatternChange(event.target.innerText);
                         setValue(event.target.innerText)
                     }}
