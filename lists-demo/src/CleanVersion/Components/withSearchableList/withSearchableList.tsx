@@ -1,7 +1,6 @@
 import { FC } from "react"
 import { useThemesAPI } from "../../../Context/useThemeAPI";
 import { useListStyles } from "../../../GlobalStyling/styleList";
-import { ProgressType } from "../../../Types/dataTypes";
 import { useSearchbox } from "../../Hooks/useSearchbox/useSearchbox";
 import { tIsFoundFunction } from "../../Types/types";
 
@@ -28,11 +27,8 @@ const withSearchableList = (ListItem: FC<any>, HeaderIcon: FC<any>, headerIconAc
         const { theme } = useThemesAPI();
         const classes = useListStyles(theme);
         const {filteredList, SearchBox} = useSearchbox(items, isFoundFunction)
-        // new Error('Implement this')
         return (
         <div className={`${classes.listWrapper}`}>
-            {/* // ${type===PHOTOS && classes.extraWidthForList}`}> */}
-            <button onClick={() => console.log(items) }>STATE</button>
             <div className={classes.pictureHeader}>
                 <div className={classes.listTitle}>{listTitle}</div>
                 <HeaderIcon className={`${classes.cursorPointer}`} onClick={headerIconAction}/>

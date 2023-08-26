@@ -11,7 +11,6 @@ export const getInitialTodosState = ():ToDoData[] => [({
 
 export const todosReducer = (state: ToDoData[], { type, payload }: { type: string, payload: tPayload | ToDoData[]} ): ToDoData[] => {
     const {data, index }: {data?: any, index: number} = payload as tPayload;
-    console.log('ToDos reducer: ', type, payload)
     switch(type) {
         case EDIT_TODOS_MESSAGE: {
             const resultState = getStateWithModifiedProp({index, data, state, propName: 'message'}) as ToDoData[];

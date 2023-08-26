@@ -67,7 +67,6 @@ interface iDeleteBranch {
 
 const tryDeletingObject = (parent: any, key: string, conditionFunction: ConditionFunctionType) => {
     const shouldDelete = conditionFunction(parent[key])
-    console.log('Should delete ', shouldDelete)
     if (shouldDelete) {
         delete parent[key];
     }
@@ -77,7 +76,6 @@ const tryDeletingObject = (parent: any, key: string, conditionFunction: Conditio
 const removeFromArrayIfMatch = (parent: any, key: string, conditionFunction: ConditionFunctionType) => {
     if (isArray(parent[key])) {
         const newArr = parent[key].filter((tree: any) => !conditionFunction(tree));
-        console.log(newArr);
         parent[key] = newArr;
     }
 }

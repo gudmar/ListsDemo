@@ -12,7 +12,7 @@ export const useModal = (children: tChildren) => {
         />
     );
     return ({
-        open: (() => { console.log('open model'); setIsOpen(true)}),
+        open: (() => { setIsOpen(true)}),
         modal
     })
 }

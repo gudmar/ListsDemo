@@ -94,7 +94,7 @@ const PhotoListItem = ({
         <div className={classes.listItem}>
             <div className={classes.pictureHeader}>
                 <div className={classes.pictureTitle}>{title}</div>
-                <div className={classes.shoppingChartItem} onClick={() => { toggleChart(); console.log('Togging') }}>
+                <div className={classes.shoppingChartItem} onClick={() => { toggleChart();}}>
                     <div className={`${classes.center} ${classes.marginRight}`}>
                         {isInChart ? 
                             <RemoveShoppingChartIcon
