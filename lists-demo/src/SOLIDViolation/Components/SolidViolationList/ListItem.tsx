@@ -8,6 +8,15 @@ import { useStyles } from "./styles";
 import RemoveShoppingChartIcon from "../../../Icons/RemoveShoppingChartIcon";
 import AddShoppingChartIcon from "../../../Icons/AddShoppingChartIcon";
 
+// COMPARE: ToDosItem, NotesItem, PhotoListItem
+
+// ISP: importing not used things,
+// not used prop 'id' in PhotosListItem
+
+// SRP
+// ListItem seems not a bed component, as decision what list will 
+// display has to be taken somewhere, but this is not a proper place to do this
+
 const NoteListItem = ({data, editMessage, deleteItem}: iNoteListItemViolation) => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);

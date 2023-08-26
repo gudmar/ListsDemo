@@ -16,6 +16,19 @@ import NotesItemWithAddButton from "./NotesItem/NotesItem";
 import PicturesItem from "./PhotoListItem/PhotoListItem";
 import { ToDosItemWithAddButton } from "./ToDosItem/ToDosItem";
 
+// COMPARE: SOLIDViolationWrapper
+
+// SRP
+// State kept in 'main' component, that knows about all lists 
+// and data it displayes
+// THis is a main component,
+// HOC adds abstraction, so DIP is not violated
+// ...rest props are used by HOC adding abstraction in proper way
+
+// useMemo necessarry for HOC, as otherwise function that creates lists
+// would be recreated every rerender cycle and list would scroll its
+// self to the top
+
 const ListsFinal = () => {
     const { theme } = useThemesAPI();
     const classes = useListStyles(theme);

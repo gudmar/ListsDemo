@@ -9,7 +9,7 @@
 * + No picture description
 * + NO picutre stocke levele
 * + No price
-* - No chart
+* + No chart
 * + No add to chart
 * - Save not work
 * + Adding item adds item at not proper index in both: violation and not violation
