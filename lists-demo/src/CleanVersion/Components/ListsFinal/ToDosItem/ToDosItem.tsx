@@ -1,9 +1,18 @@
 import { useThemesAPI } from "../../../../Context/useThemeAPI";
 import { useListStyles } from "../../../../GlobalStyling/styleList";
 import DeleteIcon from "../../../../Icons/DeleteIcon";
-import { iToDosListItem, iToDosListItemFinal, iToDosWithAddButton, ProgressType } from "../../../../Types/dataTypes";
+import { iToDosListItemFinal, iToDosWithAddButton, ProgressType } from "../../../../Types/dataTypes";
 import DoneStage from "../DoneStage/DoneStage";
 import WithAddItem from "../WithAddItem/WithAddItem";
+
+// COMPARE: ListItem from SOLIDVioaltions
+
+// OCP
+// ToDosItemWithAddButton extends ToDosItem, no modificatoin, DRY respected,
+
+// DIP
+// WithAddItem component does add an add item button,
+// nok knowing what and where it adds
 
 const ToDosItem = ({
     message,

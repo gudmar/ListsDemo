@@ -4,6 +4,8 @@ import { useListStyles } from "../../../GlobalStyling/styleList";
 import { useSearchbox } from "../../Hooks/useSearchbox/useSearchbox";
 import { tIsFoundFunction } from "../../Types/types";
 
+// COMPARE: List in SolidViolation folder
+
 type tDoWithItem = (index: number, item: any) => void;
 
 interface iListItem {

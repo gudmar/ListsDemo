@@ -15,6 +15,28 @@ import { useModal } from "../../hooks/useModal";
 import ChartContent from "../ChartContent/ChartContent";
 import AddIcon from "../../../Icons/Add";
 
+// COMPARE: withSearchabelList.tsx
+
+// SRP:
+// useDoWithStateHandler passes the state somewhere, so it has to be kept in 2 places
+
+// OCP:
+// List component has a 'switch' structure, to add next list type, or some other data for photos
+// list one would have to modify it, no extension possible
+// as list depends on fetchers, too little props passed
+
+//LSP
+// flush functions says, that something may not be needed in some cases
+// if statements changing what is displayed depending on type
+// THis has to be put somewhere, but this is not the proper 
+// component. Lists wrapper should be responsible for this
+
+// DIP
+// List component knows how to fetch data,
+// konwledge about filter function 
+// knowledge about icons used
+
+
 const getData = (type: OneOfLists): OneOfListsData[] => {
     if (type === NOTES) return notesContent;
     if (type === TO_DOS) return toDoContent;
