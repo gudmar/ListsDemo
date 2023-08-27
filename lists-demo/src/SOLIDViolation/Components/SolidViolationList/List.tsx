@@ -19,6 +19,9 @@ import AddIcon from "../../../Icons/Add";
 
 // SRP:
 // useDoWithStateHandler passes the state somewhere, so it has to be kept in 2 places
+// state should not be managed in a slingle reducer, as 3 lists will have 3 owners,
+// state should not be managed in List, as List seems a component that may be used in may places, and should be closed for modifications,
+//   Manageing state here means that when someone wants to use List in his feature, that person MODIFIES List and risks all possible regression
 
 // OCP:
 // List component has a 'switch' structure, to add next list type, or some other data for photos

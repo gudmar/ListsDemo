@@ -2,6 +2,9 @@ import { NoteData, tPayload } from "../../../../Types/dataTypes";
 import { getStateWithModifiedProp } from "../utils";
 import { ADD_NOTES_ITEM, DELETE_NOTES_ITEM, EDIT_NOTES_MESSAGE, SET_NOTES_STATE } from "./notesActions";
 
+// COMPARE:
+// reducer
+
 export const getInitialNotesState = ():NoteData[] => [({
     message: '',
 })]
