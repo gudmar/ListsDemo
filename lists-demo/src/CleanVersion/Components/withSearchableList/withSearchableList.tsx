@@ -6,6 +6,26 @@ import { tIsFoundFunction } from "../../Types/types";
 
 // COMPARE: List in SolidViolation folder
 
+// GOOD EXAMPLE:
+// SRP: 
+// No violation, iListItem contains only props related to List functionalities,
+// so no feature owner will want to change this
+
+// OCP
+// No need to change, as this HOC does not know what will be displayed
+// opened for extentions, as it is a HOC
+
+// LSP
+// ...rest used, this HOC is displayed components agnostic,
+// each type is handled by some other item component
+
+// ISP
+// No unused props/imports
+// ...rest used to make sure only used props are passd
+
+// DIP
+// HOC, ...rest, 
+
 type tDoWithItem = (index: number, item: any) => void;
 
 interface iListItem {

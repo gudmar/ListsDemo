@@ -1,6 +1,19 @@
 import { OneOfListsData, PicturesData, ToDoData, tPayload } from '../../../Types/dataTypes';
 import { ADD_ITEM, DELETE_ITEM, EDIT_DONE_STAGE, EDIT_IS_DONE, EDIT_MESSAGE, EDIT_NOTES, SET_STATE, TOGGLE_CHART } from './actions'
 
+// COMPARE:
+// notesReducer, TodosReducer, galleryReducer
+
+// SRP
+// Too many list types handeld by a single reducer. Owners of 
+// GaleryList, Notes, Todos may want change in logic causing
+// confilcts and regression problems
+// getInitialState too big
+
+// OCP
+// Closed architecture, new user scenarios added to this reducer, and
+// it is already complex
+
 export const getInitialState = ():OneOfListsData[] => [({
     message: '',
     doneStage: 0,
